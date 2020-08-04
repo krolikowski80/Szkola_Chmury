@@ -15,11 +15,12 @@ root@lapek:/home/tomasz# docker rmi 8cf1bfb43ff5
 Error response from daemon: conflict: unable to delete 8cf1bfb43ff5 (cannot be forced) - image is being used by running container 7521db463f86
 root@lapek:/home/tomasz# 
 ```
+
+```bash
 # Podczas próby usunięcia obrazu Dockera pojawia się błąd
 # "obraz jest używany przez uruchomiony kontener"
-
 # Aby dowiedzieć się, który kontener używa obrazu używam polecenia:
-```bash
+
 root@lapek:/home/tomasz# docker ps -a
 CONTAINER ID   IMAGE        COMMAND                  CREATED             STATUS                      PORTS               NAMES
 7521db463f86   nginx        "/docker-entrypoint.…"   7 minutes ago       Up 7 minutes                80/tcp              sweet_hopper
