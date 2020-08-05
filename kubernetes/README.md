@@ -4,7 +4,7 @@ Obraz i kontener
 
 ## Zadania
 
-* [nazwa](./zadanie2)
+* [Zadanie nr2 - Docker](./zadanie2)
 
 
 

@@ -101,18 +101,26 @@ root@lapek:/home/tomasz#
 # tym razem usunę obraz metodą FORCE - bez updrzedniego usuwania zastopowanego kontenera
 root@lapek:/home/tomasz# docker stop 331d77c167ca
 331d77c167ca
+```
 
+```bash
 root@lapek:/home/tomasz# docker ps -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
 331d77c167ca        nginx               "/docker-entrypoint.…"   21 minutes ago      Exited (0) 3 seconds ago                       kind_elion
+```
 
+```bash
 root@lapek:/home/tomasz# docker images 
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 nginx               latest              08393e824c32        18 hours ago        132MB
+```
 
+```bash
 root@lapek:/home/tomasz# docker rmi 08393e824c32
 Error response from daemon: conflict: unable to delete 08393e824c32 (must be forced) - image is being used by stopped container 331d77c167ca
+```
 
+```bash
 root@lapek:/home/tomasz# docker rmi -f  08393e824c32
 Untagged: nginx:latest
 Untagged: nginx@sha256:36b74457bccb56fbf8b05f79c85569501b721d4db813b684391d63e02287c0b2

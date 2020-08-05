@@ -19,4 +19,8 @@ docker ps
 
 # Pokazanie wszystkich kontenerów
 docker ps -a
+
+# Usuwanie kontenerów
+docker rm <CONTAINER>
+    --force , -f
 ```
