@@ -10,3 +10,7 @@
 ## [Create Account in GCP](https://szkolachmury.pl/google-cloud-platform-droga-architekta/tydzien-2-podstawy-pracy-z-gcp/create-account-in-gcp/)
 
 * [Cloud SDK](https://cloud.google.com/sdk)
+
+* [Hierarchy and Billing concepts](https://cloud.google.com/billing/docs/concepts?hl=pl)
+
+* [Programmatic Budget Notifications](https://cloud.google.com/billing/docs/how-to/notify?hl=pl)
