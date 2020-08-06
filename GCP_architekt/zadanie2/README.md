@@ -67,3 +67,28 @@
 ![ComputeEngine](./img/odlaczanie3.jpg "ComputeEngine")
 </details>
 
+### 3.3 Ponowne podłączenie dysku startowego
+
+<details>
+  <summary><b><i>Pokaż</i></b></summary>
+
+![ComputeEngine](./img/podlaczenie1.jpg "ComputeEngine")
+![ComputeEngine](./img/podlaczenie2.jpg "ComputeEngine")
+![ComputeEngine](./img/podlaczenie3.jpg "ComputeEngine")
+</details>
+
+### 3.4 Snapshot dysku
+
+<details>
+  <summary><b><i>Pokaż</i></b></summary>
+
+![ComputeEngine](./img/snapshot1.jpg "ComputeEngine")
+![ComputeEngine](./img/snapshot2.jpg "ComputeEngine")
+</details>
+
+### 3.5 Przenoszenie instancji pomiędzy strefami
+
+```bash
+gcloud compute instances move instance-1 --zone europe-west3-b --destination-zone europe-west3-a
+Moving gce instance instance-1...done.
+```
