@@ -36,12 +36,34 @@
 ![CloudStorage](./img/bucket4.jpg "CloudStorage")
 </details>
 
-<!-- #### 2.1 Eksport danych do pliku CSV
+#### 2.1 Eksport danych do pliku CSV
 
 <details>
   <summary><b><i>Pokaż</i></b></summary>
 
-![CloudStorage](./img/20191208192726.jpg "CloudStorage")
-![CloudStorage](./img/20191208192928.jpg "CloudStorage")
-![CloudStorage](./img/20191208192936.jpg "CloudStorage")
-</details> -->
+![CloudStorage](./img/plik_csv1.jpg "CloudStorage")
+![CloudStorage](./img/plik_csv2.jpg "CloudStorage")
+![CloudStorage](./img/plik_csv3.jpg "CloudStorage")
+</details>
+
+# Compute Engine
+
+### 3.1 Utworzenie oraz uruchamianie instancji
+
+<details>
+  <summary><b><i>Pokaż</i></b></summary>
+
+![ComputeEngine](./img/instancja1.jpg "ComputeEngine")
+![ComputeEngine](./img/instancja2.jpg "ComputeEngine")
+</details>
+
+### 3.2 Odłączenie dysku startowego
+
+<details>
+  <summary><b><i>Pokaż</i></b></summary>
+
+![ComputeEngine](./img/odlaczanie1.jpg "ComputeEngine")
+![ComputeEngine](./img/odlaczanie2.jpg "ComputeEngine")
+![ComputeEngine](./img/odlaczanie3.jpg "ComputeEngine")
+</details>
+
