@@ -92,3 +92,35 @@
 gcloud compute instances move instance-1 --zone europe-west3-b --destination-zone europe-west3-a
 Moving gce instance instance-1...done.
 ```
+
+### 3.6 Przenoszenie instancji pomiędzy regionami
+
+#### 3.6.1 Stworzenie dysku ze snapshota
+Wyświetlenie wszystkich dysków
+```bash
+[22:13][tomasz@lapek][~] $ gcloud compute disks list 
+NAME        LOCATION        LOCATION_SCOPE  SIZE_GB  TYPE         STATUS
+instance-1  europe-west2-a  zone            10       pd-standard  READY
+```
+
+Wyświetlenie snapshotów
+```bash
+[22:14][tomasz@lapek][~] $ gcloud compute snapshots list 
+NAME        DISK_SIZE_GB  SRC_DISK                         STATUS
+snapshot-1  10            europe-west2-c/disks/instance-1  READY
+```
+
+Sprawdzenie listy dostępnych zone:
+```bash
+[22:15][tomasz@lapek][~] $ gcloud compute zones list 
+NAME                       REGION                   STATUS  NEXT_MAINTENANCE  TURNDOWN_DATE
+us-east1-b                 us-east1                 UP
+```
+
+Utworzenie nowego dysku ze snapshota
+```bash
+[22:16][tomasz@lapek][~] $ gcloud compute instances create instance-2 --machine-type f1-micro --disk name=disc-2,boot=yes,mode=rw  --zone us-east1-b
+Created [https://www.googleapis.com/compute/v1/projects/szkola-chmury-tk/zones/us-east1-b/instances/instance-2].
+NAME        ZONE        MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+instance-2  us-east1-b  f1-micro                   10.142.0.2   35.237.118.234  RUNNING
+```
