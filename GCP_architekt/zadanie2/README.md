@@ -154,14 +154,6 @@ vm01-starupscript  us-east1-b  f1-micro                   10.142.0.6   35.237.11
 ```
 Usuwanie istancji
 ```bash
-[23:19][tomasz@lapek][~] $ gcloud compute instances create vm01-starupscript \
-> --tags=http-server,https-server \
-> --metadata-from-file startup-script=starup_script.txt \
-> --machine-type f1-micro \
-> --zone us-east1-b
-Created [https://www.googleapis.com/compute/v1/projects/szkola-chmury-tk/zones/us-east1-b/instances/vm01-starupscript].
-NAME               ZONE        MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
-vm01-starupscript  us-east1-b  f1-micro                   10.142.0.7   35.237.118.234  RUNNING
 [23:20][tomasz@lapek][~] $ gcloud compute instances delete vm01-starupscript --zone=us-east1-b
 The following instances will be deleted. Any attached disks configured
  to be auto-deleted will be deleted unless they are attached to any 
