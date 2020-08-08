@@ -89,7 +89,9 @@
 ### 3.5 Przenoszenie instancji pomiędzy strefami
 
 ```bash
-gcloud compute instances move instance-1 --zone europe-west3-b --destination-zone europe-west3-a
+gcloud compute instances move instance-1 \
+  --zone europe-west3-b \
+  --destination-zone europe-west3-a
 Moving gce instance instance-1...done.
 ```
 
@@ -119,8 +121,56 @@ us-east1-b                 us-east1                 UP
 
 Utworzenie nowego dysku ze snapshota
 ```bash
-[22:16][tomasz@lapek][~] $ gcloud compute instances create instance-2 --machine-type f1-micro --disk name=disc-2,boot=yes,mode=rw  --zone us-east1-b
+[22:16][tomasz@lapek][~] $ gcloud compute instances create instance-2 \
+  --machine-type f1-micro  \
+  --disk name=disc-2,boot=yes,mode=rw  \
+  --zone us-east1-b
 Created [https://www.googleapis.com/compute/v1/projects/szkola-chmury-tk/zones/us-east1-b/instances/instance-2].
 NAME        ZONE        MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
 instance-2  us-east1-b  f1-micro                   10.142.0.2   35.237.118.234  RUNNING
+```
+
+Tworzenie skryptu startowego
+```bash
+[23:08][tomasz@lapek][~] $ echo "#! /bin/bash
+apt-get update
+apt-get install -y apache2
+cat <<EOF > /var/www/html/index.html
+<html><body><h1>Hello World</h1>
+</body></html>" > starup_script.txt
+
+```
+
+Uruchomienie nowych virtual machine i skryptów startowych
+```bash
+ [23:11][tomasz@lapek][~] $ gcloud compute instances create vm01-starupscript \
+>  --tags=http-server,https-server \
+>  --metadata-from-file startup-script=starup_script.txt \
+>  --machine-type f1-micro \
+>  --zone us-east1-b
+Created [https://www.googleapis.com/compute/v1/projects/szkola-chmury-tk/zones/us-east1-b/instances/vm01-starupscript].
+NAME               ZONE        MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+vm01-starupscript  us-east1-b  f1-micro                   10.142.0.6   35.237.118.234  RUNNING
+```
+Usuwanie istancji
+```bash
+[23:19][tomasz@lapek][~] $ gcloud compute instances create vm01-starupscript \
+> --tags=http-server,https-server \
+> --metadata-from-file startup-script=starup_script.txt \
+> --machine-type f1-micro \
+> --zone us-east1-b
+Created [https://www.googleapis.com/compute/v1/projects/szkola-chmury-tk/zones/us-east1-b/instances/vm01-starupscript].
+NAME               ZONE        MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP     STATUS
+vm01-starupscript  us-east1-b  f1-micro                   10.142.0.7   35.237.118.234  RUNNING
+[23:20][tomasz@lapek][~] $ gcloud compute instances delete vm01-starupscript --zone=us-east1-b
+The following instances will be deleted. Any attached disks configured
+ to be auto-deleted will be deleted unless they are attached to any 
+other instances or the `--keep-disks` flag is given and specifies them
+ for keeping. Deleting a disk is irreversible and any data on the disk
+ will be lost.
+ - [vm01-starupscript] in [us-east1-b]
+
+Do you want to continue (Y/n)?  y
+
+Deleted [https://www.googleapis.com/compute/v1/projects/szkola-chmury-tk/zones/us-east1-b/instances/vm01-starupscript].
 ```
