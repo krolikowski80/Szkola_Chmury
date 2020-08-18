@@ -9,3 +9,7 @@
 ## Lekcje
 
 * [Podstawy pracy w GCP](./tydzien2)
+
+* [Creating Snapshot](./tydzien3/snapshot)
+
+* [Migration VM between regions/zones](./tydzien3/migration)
