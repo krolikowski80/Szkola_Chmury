@@ -20,7 +20,17 @@ docker ps
 # Pokazanie wszystkich kontenerów
 docker ps -a
 
+# zatrzymanie kontenera
+docker stop
+
 # Usuwanie kontenerów
 docker rm <CONTAINER>
+    --force , -f
+
+# Sprawdzanie listy obrazów
+docker images
+
+# Usuwanie obrazu
+docker rmi <IMAGE_ID>
     --force , -f
 ```
