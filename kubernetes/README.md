@@ -7,7 +7,7 @@ Obraz i kontener
 
 * [Obraz i kontener](./tydzien2)
 
-* [Operacje na obrazach oraz kontenerach](./tydzien3)
+* [Operacje na obrazach oraz kontenerach](./tydzien3/podstawy)
 
 
 ## Zadania
