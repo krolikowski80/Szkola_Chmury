@@ -33,4 +33,7 @@ docker images
 # Usuwanie obrazu
 docker rmi <IMAGE_ID>
     --force , -f
+
+# Tworzenie obrazów dockerowych
+
 ```
