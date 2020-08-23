@@ -7,7 +7,9 @@ Obraz i kontener
 
 * [Obraz i kontener](./tydzien2)
 
-* [Operacje na obrazach oraz kontenerach](./tydzien3/podstawy)
+* [Operacje na obrazach oraz kontenerach - cd](./tydzien3/podstawy)
+
+* [Kontenery w sieci](./tydzien3/sieci)
 
 
 ## Zadania
