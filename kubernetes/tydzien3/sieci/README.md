@@ -1,6 +1,6 @@
 
-## [Sieć w kontenerach ](https://szkolachmury.pl/kubernetes/tydzien-3-podstawy-kontenerow-2/siec-w-kontenerach/)
-
+## [Kontenery w sieci ](https://szkolachmury.pl/kubernetes/tydzien-3-podstawy-kontenerow-2/siec-w-kontenerach/)
+### 1. Podstawy sieci
 ```bash
 # Pokaż wszytkie sieci
 docker network ls

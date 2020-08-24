@@ -1,4 +1,3 @@
-Obraz i kontener
 
 # [Kubernetes dla każdego – sztuka konteneryzacji](https://szkolachmury.pl/kubernetes/)
 
@@ -11,6 +10,7 @@ Obraz i kontener
 
 * [Kontenery w sieci](./tydzien3/sieci)
 
+* [Składowanie danych](./tydzien3/dane)
 
 ## Zadania
 
