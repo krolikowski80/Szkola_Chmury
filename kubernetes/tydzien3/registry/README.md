@@ -13,7 +13,7 @@ docker import <File_Name> <My_Image_Name>
 
 ```bash
 # Tagowanie własnego obrazu
-docker tag <Repository_Name>:<TAG>
+docker tag <Repository_Name>:<TAG> <Repository_Name>:<NEW_TAG>
 ```
 
 ```bash

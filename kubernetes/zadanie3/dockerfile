@@ -1,0 +1,11 @@
+FROM alpine:3.12
+
+RUN apk add --update nodejs nodejs-npm
+
+ADD https://raw.githubusercontent.com/cloudstateu/containers-w3-homework/master/index.js .
+
+ADD https://raw.githubusercontent.com/cloudstateu/containers-w3-homework/master/package.json .
+
+RUN npm install
+
+CMD ["node", "index.js"]
