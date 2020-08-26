@@ -1,7 +1,8 @@
 # Zadanie nr3 - Docker Registry
 
-## 1 Utworzenie pliku dockerfile 
 ```bash
+# Utworzenie pliku dockerfile 
+
 FROM alpine:3.12
 
 RUN apk add --update nodejs nodejs-npm
