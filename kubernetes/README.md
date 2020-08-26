@@ -12,6 +12,8 @@
 
 * [Składowanie danych](./tydzien3/dane)
 
+* [Docker registry](./tydzien3/registry)
+
 ## Zadania
 
 * [Zadanie nr2 - Docker](./zadanie2)

@@ -29,7 +29,13 @@ docker history <IMAGE_ID>
 # Logowanie się do uruchomionego kontenera
 docker exec -t -i <CONT_ID> /bin/bash
 
-# Kopiowanie plikóe z hosta/kontenera do kontenera/hosta
+# restartowanie zastopowanego kontenera w tle
+docker start  <Cont_ID>
+
+# reattach do terminala
+docker attach <Cont_ID> 
+
+# Kopiowanie plików z hosta/kontenera do kontenera/hosta
 docker cp 'nazwa_pliku' '<CONT_ID>:path/to/file.txt'
 
 # Sprawdzanie zużycia zasobów przez kontener
@@ -49,5 +55,4 @@ docker tag old_name new_name
 
 # Pobieranie obrazu bez uruchomienia
 docker pull <IMAGE_NAME>
-
 ```

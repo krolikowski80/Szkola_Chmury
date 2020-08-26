@@ -1,5 +1,7 @@
-/.idea/modules.xml
-/.idea/inspectionProfiles/profiles_settings.xml
-/.idea/Szkola_Chmury.iml
-/.idea/vcs.xml
-/.idea/workspace.xml
+#/.idea/modules.xml
+#/.idea/inspectionProfiles/profiles_settings.xml
+#/.idea/Szkola_Chmury.iml
+#/.idea/vcs.xml
+#/.idea/workspace.xml
+
+/.idea/*
