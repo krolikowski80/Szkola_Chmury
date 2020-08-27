@@ -4,6 +4,7 @@
 
 * [Zadanie 2 - Billing, Compute Engine](./zadanie2)
 
+* [Zadanie 3 - On-premises to GCP migration](./zadanie3)
 
 
 ## Lekcje
