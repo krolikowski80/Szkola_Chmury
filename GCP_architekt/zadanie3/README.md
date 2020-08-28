@@ -30,3 +30,42 @@ Uwagi do rozwiązania:
 
 ![Diagram](./img/diagram.png "Diagram")
 </details>
+
+#### 3.2 Utworzenie VM z dostarczonego obrazu
+```bash
+# Utworzenie zmiennych
+bucketName="image-tk"
+bucketLocation="europe-west2"
+imageName="mountkirk-games-image"
+vmName="mountkirk-games-vm"
+vmType="f1-micro"
+vmZone="europe-west1-b"
+
+# Utworzenie bucketa dla obrazu
+gsutil mb -c STANDARD -l $bucketLocation gs://${bucketName}/
+
+# Skopiowanie obrazu do własnego bucketa
+gsutil cp gs://mountkirk-games-image/mountkirk-games.vmdk gs://${bucketName}/mountkirk-games.vmdk
+
+# Import obrazu do własnego repozytorium
+gcloud compute images import $imageName \
+--os=debian-9 \
+--source-file=gs://${bucketName}/mountkirk-games.vmdk
+
+# Utworzenie VM na podstawie obrazu
+gcloud compute instances create $vmName \
+--machine-type=$vmType \
+--zone=$vmZone \
+--image=$imageName \
+--tags=http-server,https-server
+```
+
+#### 3.3 Usunięcie zasobów
+```bash
+# VM
+gcloud compute instances delete $vmName --zone $vmZone
+# Image
+gcloud compute images delete $imageName
+# Bucket
+gsutil rm -r gs://${bucketName}/
+```
