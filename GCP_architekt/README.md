@@ -14,3 +14,5 @@
 * [Creating Snapshot](./tydzien3/snapshot)
 
 * [Migration VM between regions/zones](./tydzien3/migration)
+
+* [Cloud Identity and Access Management](./tydzien4)
