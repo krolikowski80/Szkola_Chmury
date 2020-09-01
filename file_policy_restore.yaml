@@ -1,0 +1,3 @@
+constraint: constraints/compute.trustedImageProjects
+listPolicy:
+  allValues: ALLOW

@@ -31,7 +31,7 @@ gcloud iam service-accounts list
 gcloud iam service-accounts keys create [/path/to/key_name.json] --iam-account [SA-NAME]@[PROJECT-ID].iam.gserviceaccount.com
 ```
 
-## 3. Roles and Custom Roles
+Roles and Custom Roles
 ```bash
 naono role.yml
 
@@ -59,3 +59,32 @@ gcloud iam roles list
 gcloud iam roles describe [role-id] --project [my-project-id]
 ```
 
+## 4 Cloud indentity and acces managment
+```bash
+#Wyświetl bieżące zasady „compute.trustedImageProjects” dla projektu i zapisanie ich w pliku
+gcloud beta resource-manager org-policies describe compute.trustedImageProjects --effective  --project <PROJECT_ID> > file_policy.yaml
+```
+```bash
+#Lista dostępnych obrazów
+gcloud compute images list
+```
+
+```bash
+#Modyfikacja istniejącej polityki - file_policy.yaml - aby odmówić dostęppu do wybranych obrazów
+cat file_policy.yaml 
+
+constraint: constraints/compute.trustedImageProjects
+listPolicy:
+  allValues: ALLOW
+
+
+nano file_policy.yaml
+constraint: constraints/compute.trustedImageProjects
+listPolicy:
+deniedValues:
+- projects/debian-cloud
+```
+```bash
+#Wysyłanie zmian
+gcloud beta resource-manager org-policies set-policy --project <PROJECT_ID> file_policy.yaml
+```
