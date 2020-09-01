@@ -1,4 +1,0 @@
-constraint: constraints/compute.trustedImageProjects
-listPolicy:
-  deniedValues:
-    - projects/debian-cloud
