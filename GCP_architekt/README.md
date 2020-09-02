@@ -15,4 +15,6 @@
 
 * [Migration VM between regions/zones](./tydzien3/migration)
 
-* [Cloud Identity and Access Management](./tydzien4)
+* [Cloud Identity and Access Management](./tydzien4/identity)
+
+* [Working with Cryptographic Keys](./tydzien4/crypto)

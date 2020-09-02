@@ -1,5 +1,6 @@
 # [Cloud identity and access management](https://szkolachmury.pl/google-cloud-platform-droga-architekta/tydzien-4-cloud-identity-and-access-management/)
 
+
 ## 1. Zarządzanie rolami i uprawnieniami
 ```bash
 #Dodaję użytkownikowi dostęp do projektu jako przeglądający
@@ -31,7 +32,7 @@ gcloud iam service-accounts list
 gcloud iam service-accounts keys create [/path/to/key_name.json] --iam-account [SA-NAME]@[PROJECT-ID].iam.gserviceaccount.com
 ```
 
-Roles and Custom Roles
+## 3. Niestandardowe role
 ```bash
 naono role.yml
 
@@ -45,7 +46,7 @@ includedPermissions:
 ```
 
 ```bash
-#Dodajemy rolę 
+#Aktualizacja zasad w wybranym projekcie
 gcloud iam roles create [role-id] --project my-project-id --file role.yaml
 ```
 
@@ -59,7 +60,7 @@ gcloud iam roles list
 gcloud iam roles describe [role-id] --project [my-project-id]
 ```
 
-## 4 Cloud indentity and acces managment
+## 4. Zarządzanie zasadami organizacji
 ```bash
 #Wyświetl bieżące zasady „compute.trustedImageProjects” dla projektu i zapisanie ich w pliku
 gcloud beta resource-manager org-policies describe compute.trustedImageProjects --effective  --project <PROJECT_ID> > file_policy.yaml
@@ -81,8 +82,8 @@ listPolicy:
 nano file_policy.yaml
 constraint: constraints/compute.trustedImageProjects
 listPolicy:
-deniedValues:
-- projects/debian-cloud
+  deniedValues:
+    - projects/debian-cloud
 ```
 ```bash
 #Wysyłanie zmian    
