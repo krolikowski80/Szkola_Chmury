@@ -85,6 +85,6 @@ deniedValues:
 - projects/debian-cloud
 ```
 ```bash
-#Wysyłanie zmian
+#Wysyłanie zmian    
 gcloud beta resource-manager org-policies set-policy --project <PROJECT_ID> file_policy.yaml
 ```
