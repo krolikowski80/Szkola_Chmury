@@ -1,0 +1,29 @@
+bindings:
+- members:
+  - serviceAccount:1012079013924@cloudbuild.gserviceaccount.com
+  role: roles/cloudbuild.builds.builder
+- members:
+  - serviceAccount:service-1012079013924@gcp-sa-cloudbuild.iam.gserviceaccount.com
+  role: roles/cloudbuild.serviceAgent
+- members:
+  - serviceAccount:1012079013924@cloudbuild.gserviceaccount.com
+  role: roles/compute.admin
+- members:
+  - serviceAccount:service-1012079013924@compute-system.iam.gserviceaccount.com
+  role: roles/compute.serviceAgent
+- members:
+  - serviceAccount:1012079013924-compute@developer.gserviceaccount.com
+  - serviceAccount:1012079013924@cloudservices.gserviceaccount.com
+  - serviceAccount:service-1012079013924@containerregistry.iam.gserviceaccount.com
+  role: roles/editor
+- members:
+  - serviceAccount:1012079013924@cloudbuild.gserviceaccount.com
+  role: roles/iam.serviceAccountTokenCreator
+- members:
+  - serviceAccount:1012079013924@cloudbuild.gserviceaccount.com
+  role: roles/iam.serviceAccountUser
+- members:
+  - user:t.krolikowski@gmail.com
+  role: roles/owner
+etag: BwWt9LVEXqc=
+version: 1
