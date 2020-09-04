@@ -64,7 +64,7 @@ gcloud kms keyrings add-iam-policy-binding <KEYRING_NAME> \
 --member user:$USER_EMAIL \
 --role roles/cloudkms.admin
 
-#Przypisanie uprawnień do szyfrowania i odszyfrowywania danych dowolnego klucza CryptoKey w utworzonym KeyRingu
+#Przypisanie uprawnień do szyfrowania i odszyfrowywania danych i użycia dowolnego klucza CryptoKey w utworzonym KeyRingu
 gcloud kms keyrings add-iam-policy-binding <KEYRING_NAME> \
 --location global \
 --member user:$USER_EMAIL \

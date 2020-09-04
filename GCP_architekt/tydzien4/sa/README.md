@@ -26,7 +26,7 @@ gcloud iam service-accounts create [SA_NAME] \
 #Listowanie Service Accunt
 gcloud iam service-accounts list
 
-#Przydzielanie roli do ervice Account
+#Przydzielanie roli do Service Account
 gcloud projects add-iam-policy-binding [PROJECT_ID] \
 --member serviceAccount:[SA_NAME] \
 --role roles/editor
