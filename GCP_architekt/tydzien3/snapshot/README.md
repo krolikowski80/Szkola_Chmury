@@ -1,6 +1,6 @@
 # [Snapshot](https://szkolachmury.pl/google-cloud-platform-droga-architekta/tydzien-3-compute-engine/snapshots/)
 
-## 1. Profile konfiguracyjne
+### 1. Profile konfiguracyjne
 ```bash
 # Lista projektów
 gcloud projects list
@@ -24,7 +24,7 @@ gcloud compute regions list
 gcloud config set compute/region us-central1
 ```
 
-## 2. Tworzenie VM
+### 2. Tworzenie VM
 ```bash
 # Tworzenie instancji VM o nazwie vm01, typie f1-micro i w zonie europe-west1-b
 cloud compute instances create vm01 \
@@ -45,7 +45,7 @@ gcloud compute instances attach-disk vm01 \
 --zone=europe-west1-b
 ```
 
-## 3. Połączenie się do VM przez SSH
+### 3. Połączenie się do VM przez SSH
 ```bash
 # Logowanie przez SSH do VM
 gcloud compute ssh vm01 \
@@ -68,7 +68,7 @@ echo "test1" > file1.txt
 cat file1.txt
 ```
 
-## 4. Tworzenie snapshota
+### 4. Tworzenie snapshota
 ```bash
 # Stworzenie snapshota dysku
 gcloud compute disks snapshot vm01disk \
@@ -79,7 +79,7 @@ gcloud compute disks snapshot vm01disk \
 gcloud compute snapshots list
 ```
 
-## 5. Wykorzystanie snapshota do utworzenia nowego dysku
+### 5. Wykorzystanie snapshota do utworzenia nowego dysku
 ```bash
 # Utworzenie nowej instancji VM
 gcloud compute instances create vm02 \
@@ -95,7 +95,7 @@ gcloud compute instances attach-disk vm02 \
 --disk vm02disk \
 --zone us-central1-c
 ```
-## 7. Usunięcie zasobów
+### 7. Usunięcie zasobów
 ```bash
 # Odpięcie dysków z VM
 gcloud compute instances detach-disk vm01 \

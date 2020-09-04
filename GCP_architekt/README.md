@@ -13,13 +13,16 @@
 
 * [Podstawy pracy w GCP](./tydzien2)
 
-* TYDZIEŃ 3
-    * [Creating Snapshot](./tydzien3/snapshot)
+* [Creating Snapshot](./tydzien3/snapshot)
 
-    * [Migration VM between regions/zones](./tydzien3/migration)
+* [Migration VM between regions/zones](./tydzien3/migration)
 
-* TYDZIEŃ 4
+* [Managing roles and permissions](./tydzien4/managig)
 
-    * [Cloud Identity and Access Management](./tydzien4/identity)
+* [Roles and Custom Roles](./tydzien4/customrole)
 
-    * [Working with Cryptographic Keys](./tydzien4/crypto)
+* [Service Accounts](./tydzien4/sa)
+
+* [Cloud Organization Policy Service and Constraints](./tydzien4/organization_pol)
+
+* [Working with Cryptographic Keys](./tydzien4/crypto_key)
