@@ -24,7 +24,8 @@
     
     1.6 Kliknij Utwórz.
 
-### 3. Utwórz rolę niestandardową z CLI na podstawie pliku YAML:
+### 3. Utwórz rolę niestandardową z CLI na podstawie pliku YAML i za pomocą komędy
+x
 ```bash
 # Utwórz plik role.yml
 title: "Role Viewer"
@@ -39,10 +40,40 @@ gcloud iam roles create [role-id] \
 --project my-project-id \
 --file my-role-definition.yaml
 
-#Pokaż wszystkie role
-gcloud iam roles list
-
 #Opisz naszą nową rolę za pomocą polecenia:
 gcloud iam roles describe [role-id] \
 --project [my-project-id]
+
+#Pokaż wszystkie role
+gcloud iam roles list
+
+
+#Wyświetl lisę ról niestandardowych
+gcloud iam roles list --project [PROJECT_ID]
+
+#Aby wyświetlić listę usuniętych ról, możesz również określić 
+    --show-deletedflagę.
+
+#Update roli po naniesionych zmianach w pliku .yml
+gcloud iam roles update [ROLE_ID] \
+--project [PROJECT_ID] \
+--file new-role-definition.yaml
+
+#Update roli za pomocą polecenia
+cloud iam roles update [ROLE_ID] \
+--project [PROJECT_ID] \
+--add-permissions storage.buckets.get,storage.buckets.list
+
+#Wyłączanie roli
+gcloud iam roles update [ROLE_ID] \
+--project [PROJECT_ID] \
+--stage DISABLED
+
+#Usuwanie roli niestandardowej
+gcloud iam roles delete [ROLE_ID] \
+--project [PROJECT_ID]
+
+#Cofanie usunięcia roli niestandardowej
+gcloud iam roles undelete [ROLE_ID] \
+--project [PROJECT_ID]
 ```

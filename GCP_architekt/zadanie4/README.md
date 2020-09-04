@@ -13,7 +13,7 @@
 #Zmienne
 bucketName="zadanie4tk"
 bucketLoc="us-west1"
-saAccountName="tkzad4"
+sAccountName="tkzad4"
 
 #Dodane po utprzeniu SA
 serviceAccountName="tkzad4@szkola-chmury-tk.iam.gserviceaccount.com"
@@ -23,10 +23,11 @@ serviceAccountName="tkzad4@szkola-chmury-tk.iam.gserviceaccount.com"
 gsutil mb -l $bucketLoc gs://${bucketName}/
 
 #Tworzeę Service Accunt
-gcloud iam service-accounts create $saAccountName \
+gcloud iam service-accounts create $sAccountName \
 --description "Konto serwisowe do VM w zadaniu nr 4" \
 --display-name "konto do VM"
 
 #lista kont serwisowych - sprawdzam adres email nowego SA
 gcloud iam service-accounts list
+
 

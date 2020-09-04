@@ -18,13 +18,18 @@
 
 ### 2. Tworzenie Service Accunt za pomocą CLI
 ```bash
-#Tworzenie Service Accunt
-gcloud iam service-accounts create [SA-NAME] \
+#Tworzenie Service Account
+gcloud iam service-accounts create [SA_NAME] \
 --description "[SA-DESCRIPTION]" \
 --display-name "[SA-DISPLAY-NAME]"
 
 #Listowanie Service Accunt
 gcloud iam service-accounts list
+
+#Przydzielanie roli do ervice Account
+gcloud projects add-iam-policy-binding [PROJECT_ID] \
+--member serviceAccount:[SA_NAME] \
+--role roles/editor
 
 #Tworzenie kluczy 
 gcloud iam service-accounts keys create [/path/to/key_name.json] \
