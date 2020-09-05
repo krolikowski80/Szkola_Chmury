@@ -126,25 +126,22 @@ AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com d
 
 ### 1.6 Dodawanie uprawnień odczytu do SA
 ```bash
+#Dodaję prawa do odczytu dla SA do konkretnego bucketa
+gsutil iam ch serviceAccount:$saEmail:roles/storage.legacyBucketReader gs://${bucketName}/
 
-#Przydzielanie roli do Service Account
-gcloud projects add-iam-policy-binding szkola-chmury-tk \
---member serviceAccount:$saEmail \
---role roles/storage.objectViewer
+#wynik
+gcloud compute ssh $vmName
 
-#wuynik
-tomasz@vmzadanienr4tk:~$ gsutil ls
-AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.buckets.list access to the Google Cloud project.
 tomasz@vmzadanienr4tk:~$ gsutil ls gs://zadanie4tk/
 gs://zadanie4tk/file01.txt
 gs://zadanie4tk/file02.txt
 gs://zadanie4tk/file03.txt
 gs://zadanie4tk/file04.txt
 gs://zadanie4tk/file05.txt
-
-tomasz@vmzadanienr4tk:~$ gsutil cp plik.txt gs://zadanie4tk/
-Copying file://plik.txt [Content-Type=text/plain]...
-AccessDeniedException: 403 Insufficient Permission             
+tomasz@vmzadanienr4tk:~$ gsutil ls
+AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.buckets.list access to the Google Cloud project.
+tomasz@vmzadanienr4tk:~$ gsutil ls gs://billing_bucket_tk/
+AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.objects.list access to the Google Cloud Storage bucket.
 ```
 >Teraz lepiej
 
