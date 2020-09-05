@@ -51,8 +51,7 @@ curl -v "https://cloudkms.googleapis.com/v1/projects/$DEVSHELL_PROJECT_ID/locati
 >W KMS istnieją dwa główne uprawnienia, na których można się skupić. Jedno uprawnienie umożliwia użytkownikowi lub kontu usługi zarządzanie zasobami KMS,a drugie umożliwia użytkownikowi lub kontu usługi używanie kluczy do szyfrowania i odszyfrowywania danych.
 
 ```bash
-#Zmienna uzyskująca e-mail urzytkownika
-USER_EMAIL=$(gcloud auth list --limit=1 2>/dev/null | grep '@' | awk '{print $2}')
+#zmienne
 BUCKET_NAME=mybucketname
 
 #Tworzę bucket

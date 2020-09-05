@@ -11,23 +11,118 @@
 ### 1.1 Przygotowanie `Cloud Storage`
 ```bash
 #Zmienne
-bucketName="zadanie4tk"
-bucketLoc="us-west1"
-sAccountName="tkzad4"
-
-#Dodane po utprzeniu SA
-serviceAccountName="tkzad4@szkola-chmury-tk.iam.gserviceaccount.com"
+bucketName="zadanie4tk" #lokacja brana z configuracji projektu
 
 #Tworzę bukiecik
-* Region buketa można było pozostawić na taki, jaki jest w configuracji CLI
-gsutil mb -l $bucketLoc gs://${bucketName}/
+gsutil mb gs://${bucketName}/
 
-#Tworzeę Service Accunt
-gcloud iam service-accounts create $sAccountName \
---description "Konto serwisowe do VM w zadaniu nr 4" \
---display-name "konto do VM"
+#Kopiuję pliki do bucket
+gsutil cp ../sample_data/* gs://${bucketName}/
 
-#lista kont serwisowych - sprawdzam adres email nowego SA
-gcloud iam service-accounts list
+#Wynik
+[16:19][tomasz@lapek][~/my_repos/Szkola_Chmury] $ gsutil ls gs://${bucketName}/
+gs://zadanie4tk/file01.txt
+gs://zadanie4tk/file02.txt
+gs://zadanie4tk/file03.txt
+gs://zadanie4tk/file04.txt
+gs://zadanie4tk/file05.txt
+```
 
+### 1.2 Przygotowuję VM
+>Domyślne ustawienia sCloud API access scopes dla nowo tworzonego VM są takie, że maszyna ma dostęp do bucet w trybie "Read Only". Wiec nie ma co tu majstrować.
+Service account też zostanie domyślne.
+```bash
+#Zmienne
+vmName="vmzadanienr4tk" #lokacja brana z configuracji projektu
+
+#Tworzę VM
+gcloud compute instances create $vmName --machine-type=f1-micro
+
+#Wynik
+[16:19][tomasz@lapek][~/my_repos/Szkola_Chmury] $ gcloud compute instances list 
+NAME            ZONE            MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
+vmzadanienr4tk  europe-west1-b  f1-micro                   10.132.0.12  35.205.9.231  RUNNING
+
+#Loguję się na VM
+gcloud compute ssh vmzadanienr4tk
+
+#Sprawdzam uprawnienia
+tomasz@vmzadanienr4tk:~$ gsutil ls
+gs://zadanie4tk/
+gs://billing_bucket_tk/
+```
+> Oto problem tego rozwiązania. Widać wszystkie buckety w projekcie.
+```bash
+tomasz@vmzadanienr4tk:~$ gsutil ls gs://zadanie4tk/
+gs://zadanie4tk/file01.txt
+gs://zadanie4tk/file02.txt
+gs://zadanie4tk/file03.txt
+gs://zadanie4tk/file04.txt
+gs://zadanie4tk/file05.txt
+
+tomasz@vmzadanienr4tk:~$ gsutil cat gs://zadanie4tk/file01.txt
+We diminution preference thoroughlyif. Joy deal pain view much her time....
+
+tomasz@vmzadanienr4tk:~$ gsutil rm gs://zadanie4tk/file01.txt
+Removing gs://zadanie4tk/file01.txt...
+AccessDeniedException: 403 Insufficient Permission
+
+# I w drugą stronę
+tomasz@vmzadanienr4tk:~$ echo "ram pam pam, tra la lam" > plik.txt
+
+tomasz@vmzadanienr4tk:~$ gsutil cp plik.txt gs://zadanie4tk/
+Copying file://plik.txt [Content-Type=text/plain]...
+AccessDeniedException: 403 Insufficient Permission          
+```
+>Jak widać uprawnienia są OK. Jedyny problem jest taki, że widać wszystkie buckety. Trzeba będzie zmienić Service Account i odebrać uprawnienia do listy bucketów.
+
+```bash
+#Zmienne
+saName="zadanie4tk"
+saEmail="zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com" #gcloud iam service-accounts list
+
+#Tworzę nowe Service Account
+gcloud iam service-accounts create $saName \
+--description "Konto serwisowe na potrzeby zadania 4" \
+--display-name $saName
+
+#Zatrzymuję instancję VM
+gcloud compute instances stop $vmName
+sa
+#Zmieniam konto dla VM
+cloud compute instances set-service-account  $vmName \
+--service-account=$saEmail
+
+#Start VM z nowym kontem
+gcloud compute instances start $vmName
+
+#Loguję się na VM
+gcloud compute ssh $vmName
+
+#Sprawdzam uprawnienia
+tomasz@vmzadanienr4tk:~$ gsutil ls
+AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.buckets.list access to the Google Cloud project.
+
+tomasz@vmzadanienr4tk:~$ gsutil ls gs://zadanie4tk/
+AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.objects.list access to the Google Cloud Storage bucket.
+```
+>Nowe konto nie ma nawet prawa do odczytu, więc je nadam.
+```bash
+
+#Przydzielanie roli do Service Account
+gcloud projects add-iam-policy-binding szkola-chmury-tk \
+--member serviceAccount:$saEmail \
+--role roles/storage.objectViewer
+
+#wuynik
+tomasz@vmzadanienr4tk:~$ gsutil ls
+AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.buckets.list access to the Google Cloud project.
+tomasz@vmzadanienr4tk:~$ gsutil ls gs://zadanie4tk/
+gs://zadanie4tk/file01.txt
+gs://zadanie4tk/file02.txt
+gs://zadanie4tk/file03.txt
+gs://zadanie4tk/file04.txt
+gs://zadanie4tk/file05.txt
+```
+>Teraz lepiej
 
