@@ -1,8 +1,9 @@
  # [Zadanie nr 4](https://szkolachmury.pl/google-cloud-platform-droga-architekta/tydzien-4-cloud-identity-and-access-management/zadanie-domowe-nr-4/)
 
 * [1. Zadanie 1](#1-zadanie-1)
-    * [1.2 Przygotowanie `Cloud Storage`](#11-przygotowanie-cloud-storage)
-
+    * [1.1 Przygotowanie `Cloud Storage`](#11-przygotowanie-cloud-storage)
+    * [1.2 Przygotowanie `VM`](#12-Przygotowanie-VM)
+    * [1.3 Logpwanie i sprawdzenie uprawnień](#13-logpwanie-i-sprawdzenie-uprawnień)
 # 1. Zadanie 1
 
 > Klient poprosił cię o przygotowanie maszyny dla swoich pracowników, którzy będą mogli pobierać faktury z przygotowanego repozytorium (w naszym przypadku jest to pojemnik Cloud Storage)
@@ -28,8 +29,8 @@ gs://zadanie4tk/file04.txt
 gs://zadanie4tk/file05.txt
 ```
 
-### 1.2 Przygotowuję VM
->Domyślne ustawienia sCloud API access scopes dla nowo tworzonego VM są takie, że maszyna ma dostęp do bucet w trybie "Read Only". Wiec nie ma co tu majstrować.
+### 1.2 Przygotowanie `VM`
+>Domyślne ustawienia Cloud API access scopes dla nowo tworzonego VM są takie, że maszyna ma dostęp do bucet w trybie "Read Only". Wiec nie ma co tu majstrować.
 Service account też zostanie domyślne.
 ```bash
 #Zmienne
@@ -42,7 +43,10 @@ gcloud compute instances create $vmName --machine-type=f1-micro
 [16:19][tomasz@lapek][~/my_repos/Szkola_Chmury] $ gcloud compute instances list 
 NAME            ZONE            MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
 vmzadanienr4tk  europe-west1-b  f1-micro                   10.132.0.12  35.205.9.231  RUNNING
+```
 
+### 1.3 Logpwanie i sprawdzenie uprawnień
+```bash
 #Loguję się na VM
 gcloud compute ssh vmzadanienr4tk
 
@@ -53,6 +57,7 @@ gs://billing_bucket_tk/
 ```
 > Oto problem tego rozwiązania. Widać wszystkie buckety w projekcie.
 ```bash
+#Lista plików na bucket
 tomasz@vmzadanienr4tk:~$ gsutil ls gs://zadanie4tk/
 gs://zadanie4tk/file01.txt
 gs://zadanie4tk/file02.txt
@@ -60,9 +65,11 @@ gs://zadanie4tk/file03.txt
 gs://zadanie4tk/file04.txt
 gs://zadanie4tk/file05.txt
 
+#Próba odczytu z zasobów - działą
 tomasz@vmzadanienr4tk:~$ gsutil cat gs://zadanie4tk/file01.txt
 We diminution preference thoroughlyif. Joy deal pain view much her time....
 
+#Próba usunięcia zasobów - już nie
 tomasz@vmzadanienr4tk:~$ gsutil rm gs://zadanie4tk/file01.txt
 Removing gs://zadanie4tk/file01.txt...
 AccessDeniedException: 403 Insufficient Permission
@@ -70,6 +77,7 @@ AccessDeniedException: 403 Insufficient Permission
 # I w drugą stronę
 tomasz@vmzadanienr4tk:~$ echo "ram pam pam, tra la lam" > plik.txt
 
+#Próba zapisu
 tomasz@vmzadanienr4tk:~$ gsutil cp plik.txt gs://zadanie4tk/
 Copying file://plik.txt [Content-Type=text/plain]...
 AccessDeniedException: 403 Insufficient Permission          
@@ -88,7 +96,7 @@ gcloud iam service-accounts create $saName \
 
 #Zatrzymuję instancję VM
 gcloud compute instances stop $vmName
-sa
+
 #Zmieniam konto dla VM
 cloud compute instances set-service-account  $vmName \
 --service-account=$saEmail
@@ -123,6 +131,10 @@ gs://zadanie4tk/file02.txt
 gs://zadanie4tk/file03.txt
 gs://zadanie4tk/file04.txt
 gs://zadanie4tk/file05.txt
+
+tomasz@vmzadanienr4tk:~$ gsutil cp plik.txt gs://zadanie4tk/
+Copying file://plik.txt [Content-Type=text/plain]...
+AccessDeniedException: 403 Insufficient Permission             
 ```
 >Teraz lepiej
 
