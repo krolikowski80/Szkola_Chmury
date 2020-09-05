@@ -14,7 +14,8 @@ gsutil mb gs://<BUCKET_NAME>
 gcloud services enable cloudkms.googleapis.com
 
 # Utworzenie globalnego keyring
-gcloud kms keyrings create <KEYRING_NAME>
+gcloud kms keyrings create <KEYRING_NAME> \
+--location=<KEYRING_LOCATION>
 
 # Sprawdzenie listy keyringów
 gcloud kms keyrings list \

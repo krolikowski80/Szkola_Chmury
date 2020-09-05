@@ -7,7 +7,12 @@
     * [1.4 Wymiana `Service Account`](#14-wymiana-service-account)
     * [1.5 Kolejne sprawdzenie uprawnień](#15-kolejne-sprawdzenie-uprawnień)
     * [1.6 Dodawanie uprawnień odczytu do SA](#16-dodawanie-uprawnień-odczytu-do-sa)
-*[2. Zadanie 2](#2-zadanie-2)
+    * [1.7 Usunięcie zasobów](#17-usunięcie-zasobóww)
+* [2. Zadanie 2](#2-zadanie-2)
+    * [2.1 Przygotowanie `Cloud Storage`](#21-przygotowanie-cloud-storage)
+    * [2.2 Uruchomieie usługi KMS](#22-uruchomieie-usługi-kms)
+    * [2.3 Utworzenie klucza asymetrycznego](#23-utworzenie-klucza-asymetrycznego)
+    
 # 1. Zadanie 1
 
 > Klient poprosił cię o przygotowanie maszyny dla swoich pracowników, którzy będą mogli pobierać faktury z przygotowanego repozytorium (w naszym przypadku jest to pojemnik Cloud Storage)
@@ -145,5 +150,59 @@ AccessDeniedException: 403 zadanie4tk@szkola-chmury-tk.iam.gserviceaccount.com d
 ```
 >Teraz lepiej
 
-# 1. Zadanie 2
+### 1.7 Usunięcie zasobów
+```bash
+#Usuwam VM
+gcloud compute instances delete $vmName
 
+#Usuwam SA
+gcloud iam service-accounts delete $saEmail
+
+#Usuwam storage
+gsutil rm -r gs://${bucketName}/
+```
+
+# 2. Zadanie 2
+>Dany klient przetrzymuje bardzo ważne dokumenty. Zarząd zdecydował, że wprowadzą szyfrowanie krytycznych dokumentów, które będą mogły zostać odszyfrowane po stronie pracownika, który z danego dokumentu chce skorzystać.
+
+### 2.1 Przygotowanie `Cloud Storage`
+```bash
+#Zmienne
+bucketName="zadanie42tk" #Lokacja oczywiście określona w configu
+
+#Tworzę bucket
+gsutil mb gs://${bucketName}/
+```
+### 2.2 Uruchomieie usługi KMS
+
+```bash
+# Włączenie api dla usługi KMS
+gcloud services enable cloudkms.googleapis.com
+```
+
+### 2.3 [Utworzenie klucza asymetrycznego](https://cloud.google.com/kms/docs/creating-asymmetric-keys)
+```bash
+#zmienne
+keyringName="keyringZad4"
+keyRingLocation="global"
+keyName="key1zad42"
+
+# Utworzenie globalnego keyring
+gcloud kms keyrings create $keyringName \
+--location=$keyRingLocation
+
+#Sprawdzam
+gcloud kms keyrings list \
+--location=$keyRingLocation
+
+#Utworzenie klucza 
+gcloud kms keys create $keyName \
+--keyring $keyringName \
+--location $keyRingLocation \
+--purpose "asymmetric-encryption" \
+--default-algorithm "rsa-decrypt-oaep-2048-sha256"
+
+# Sprawdzenie listy kluczy
+gcloud kms keys list \
+--keyring=$keyringName \
+--location=$keyRingLocation
