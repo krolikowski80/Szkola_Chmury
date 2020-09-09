@@ -32,7 +32,7 @@ gcloud projects add-iam-policy-binding [projectid] \
 --member user:user@example.com \
 --role roles/viewer
 
-#OdwołaNIE dostępU za pomocą polecenia
+#Odwołanie dostępu za pomocą polecenia
 gcloud projects remove-iam-policy-binding [projectid] \
 --member user:user@example.com \
 --role roles/viewer

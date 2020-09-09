@@ -9,10 +9,19 @@
     * [1.6 Dodawanie uprawnień odczytu do SA](#16-dodawanie-uprawnień-odczytu-do-sa)
     * [1.7 Usunięcie zasobów](#17-usunięcie-zasobóww)
 * [2. Zadanie 2](#2-zadanie-2)
-    * [2.1 Przygotowanie `Cloud Storage`](#21-przygotowanie-cloud-storage)
-    * [2.2 Uruchomieie usługi KMS](#22-uruchomieie-usługi-kms)
-    * [2.3 Utworzenie klucza asymetrycznego](#23-utworzenie-klucza-asymetrycznego)
-    
+    *[2.1 Utworzenie storage](#21-utworzenie-storage])
+    *[2.2 Utworzenie Service Account z prawem RW do storage](#22-Utworzenie-Service-Account-z-prawem-RW-do-storage)
+    *[2.3 Uruchomienie usługi KMS](#23-Uruchomienie-usługi-KMS)
+    *[2.4 Utworzenie keyring, kluczy symetrychnych i asymetrycznych](#24-Utworzenie-keyring,-kluczy-symetrychnych-i-asymetrycznych])
+    *[2.5 Przydział uprawnień dla SA do keyringa](#25-Przydział-uprawnień-dla-SA-do-keyringa)
+    *[2.6 Utworzenie VM pod kontrolą SA](#26-Utworzenie-VM-pod-kontrolą-SA)
+    *[2.7 Logowanie na maszyny i szyfrowanie](#27-Logowanie-na-maszyny-i-szyfrowanie])
+      *[2.7.1 Szyfrowanie asymetryczne](#271-Szyfrowanie-asymetryczne)
+      *[2.7.2 Odszyfrowanie asymetryczne](#272-Odszyfrowanie-aymetryczne)
+      *[2.7.3 Szyfrowanie symetryczne](#273-Szyfrowanie-symetryczne)
+      *[2.7.4 Odszyfrowanie symetryczne](#274-Odszyfrowanie-symetryczne])
+    *[2.8 Usuwanie zaspbów](#28-Usuwanie-zaspbów)
+        
 # 1. Zadanie 1
 
 > Klient poprosił cię o przygotowanie maszyny dla swoich pracowników, którzy będą mogli pobierać faktury z przygotowanego repozytorium (w naszym przypadku jest to pojemnik Cloud Storage)
@@ -165,44 +174,236 @@ gsutil rm -r gs://${bucketName}/
 # 2. Zadanie 2
 >Dany klient przetrzymuje bardzo ważne dokumenty. Zarząd zdecydował, że wprowadzą szyfrowanie krytycznych dokumentów, które będą mogły zostać odszyfrowane po stronie pracownika, który z danego dokumentu chce skorzystać.
 
-### 2.1 Przygotowanie `Cloud Storage`
+### 2.1 Utworzenie storage
 ```bash
 #Zmienne
-bucketName="zadanie42tk" #Lokacja oczywiście określona w configu
+bucketName="zadanie42tk"
+bucketReg="us-central1"
 
-#Tworzę bucket
-gsutil mb gs://${bucketName}/
+#Tworzę storage
+gsutil mb -l $bucketReg gs://${bucketName}/
 ```
-### 2.2 Uruchomieie usługi KMS
 
+### 2.2 Utworzenie Service Account z prawem RW do storage
+```bash
+#Zmienne
+saName="zad42tk"
+saEmail="zad42tk@szkola-chmury-tk.iam.gserviceaccount.com" #gcloud iam service-accounts list 
+
+#Tworzenie Service Account
+gcloud iam service-accounts create $saName \
+--display-name=$saName
+
+#Przydział prawa RW do danego stgorage
+gsutil iam ch serviceAccount\
+:$saEmail\
+:roles/storage.objectAdmin \
+gs://${bucketName}
+```
+### 2.3 Uruchomienie usługi KMS
 ```bash
 # Włączenie api dla usługi KMS
 gcloud services enable cloudkms.googleapis.com
 ```
 
-### 2.3 [Utworzenie klucza asymetrycznego](https://cloud.google.com/kms/docs/creating-asymmetric-keys)
+### 2.4 Utworzenie keyring, kluczy symetrychnych i asymetrycznych
 ```bash
-#zmienne
-keyringName="keyringZad4"
-keyRingLocation="global"
-keyName="key1zad42"
+#Zmienne
+keyRing="zad4ring"
+syncKey="synckey"
+asyncKey="asynckey"
 
-# Utworzenie globalnego keyring
-gcloud kms keyrings create $keyringName \
---location=$keyRingLocation
+gcloud kms keyrings create serviceAccount\
+--location=global
+
+# Utworzenie symetrycznego klucza do szyfrowania danych
+gcloud kms keys create $syncKey \
+--location global \
+--keyring $keyRing \
+--purpose encryption
+
+# Utworzenie pary kluczy asymetrycznych
+gcloud kms keys create $asyncKey \
+--location global \
+--keyring $keyRing \
+--purpose asymmetric-encryption \
+--default-algorithm rsa-decrypt-oaep-4096-sha256 \
+--protection-level software
+```
+
+### 2.5 Przydział uprawnień(roli) dla SA do keyringa
+```bash
+#pobranie polityki dla keyring
+gcloud kms keyrings get-iam-policy $keyRing --location global > kms_keyring.yaml
+
+#edycja polityki
+bindings:
+- members:
+  - serviceAccount:zad42tk@szkola-chmury-tk.iam.gserviceaccount.com
+  role: roles/cloudkms.cryptoKeyEncrypterDecrypter
+- members:
+  - serviceAccount:zad42tk@szkola-chmury-tk.iam.gserviceaccount.com
+  role: roles/cloudkms.publicKeyViewer
+etag: BwWu0mSQSSk=
+version: 1
+
+#ustawienie polityki
+gcloud kms keyrings set-iam-policy $keyRing --location global kms_keyring.yaml
+```
+
+### 2.6 Utworzenie VM pod kontrolą SA
+```bash
+#Zmienne
+vm1name="instance1"
+vm2name="instance2"
+
+#utworzenie maszyny 1
+gcloud compute instances create $vm1name \
+--machine-type f1-micro \
+--zone=europe-west1-b \
+--service-account=$saEmail \
+--scopes https://www.googleapis.com/auth/cloudkms,https://www.googleapis.com/auth/devstorage.read_write
+
+#utworzenie maszyny 2
+gcloud compute instances create $vm2name \
+--machine-type f1-micro \
+--zone=us-central1-b \
+--service-account=$saEmail \
+--scopes https://www.googleapis.com/auth/cloudkms,https://www.googleapis.com/auth/devstorage.read_write
+```
+
+### 2.7 Logowanie na maszyny i szyfrowanie
+```bash
+#Jest dostep?
+tomasz@instance1:~$ gsutil ls gs://zadanie42tk/
+gs://zadanie42tk/file01.txt
+gs://zadanie42tk/file02.txt
+gs://zadanie42tk/file03.txt
+gs://zadanie42tk/file04.txt
+gs://zadanie42tk/file05.txt
+
+#A innego bucketa?
+gsutil ls gs://billing_bucket_tk/
+AccessDeniedException: 403 zad42tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.objects.list access to the Google Cloud Storage bucket.
+
+#A lista?
+gsutil ls
+AccessDeniedException: 403 zad42tk@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.buckets.list access to the Google Cloud project.
+
+```
+
+#### 2.7.1 Szyfrowanie asymetryczne
+```bash
+#Loguję się na maszynie nr 1
+gcloud compute ssh $vm1name
+
+#Kopiuje pliki lokalnie
+mkdir encrypted && mkdir decrypted && gsutil -m cp gs://zadanie42tk/* decrypted/
+
+#Pobieram klucz pubiczny
+gcloud kms keys versions get-public-key 1 \
+--key $asyncKey  \
+--keyring $keyRing \
+--location global \
+--output-file ~/asyncKey.pub
+
+#Szyfruję asynchronicznie 5 plików
+files=$(ls ~/decrypted/)
+cd ~/decrypted/
+for f in $files ; do
+    openssl pkeyutl -in $f \
+    -encrypt \
+    -pubin \
+    -inkey ~/asyncKey.pub \
+    -pkeyopt rsa_padding_mode:oaep \
+    -pkeyopt rsa_oaep_md:sha256 \
+    -pkeyopt rsa_mgf1_md:sha256  > ~/encrypted/$f.enc
+done
+
+#Kopiuję do storge
+gsutil -m cp -r encrypted/ gs://zadanie42tk/
 
 #Sprawdzam
-gcloud kms keyrings list \
---location=$keyRingLocation
+sutil ls gs://zadanie42tk/encrypted/
+gs://zadanie42tk/encrypted/file01.txt.enc
+gs://zadanie42tk/encrypted/file02.txt.enc
+gs://zadanie42tk/encrypted/file03.txt.enc
+gs://zadanie42tk/encrypted/file04.txt.enc
+gs://zadanie42tk/encrypted/file05.txt.enc
+```
 
-#Utworzenie klucza 
-gcloud kms keys create $keyName \
---keyring $keyringName \
---location $keyRingLocation \
---purpose "asymmetric-encryption" \
---default-algorithm "rsa-decrypt-oaep-2048-sha256"
+#### 2.7.2 Odszyfrowanie asymetryczne
+```bash
+#Loguję się na maszynie nr 2
+gcloud compute ssh $vm2name
 
-# Sprawdzenie listy kluczy
-gcloud kms keys list \
---keyring=$keyringName \
---location=$keyRingLocation
+# Kopiuje pliki lokalnie
+mkdir encrypted && mkdir decrypted && gsutil -m cp gs://zadanie42tk/encrypted/* encrypted/
+
+#Dekoduje plik
+gcloud kms asymmetric-decrypt \
+--version 1 \
+--key asynckey \
+--keyring zad4ring \
+--location global  \
+--ciphertext-file ~/encrypted/file01.txt.enc \
+--plaintext-file ~/decrypted/file01.txt
+
+#Działa
+cat decrypted/file01.txt 
+We diminution preference thoroughly if....
+```
+#### 2.7.3 Szyfrowanie symetryczne
+```bash
+#Loguję się na maszynie nr 2
+gcloud compute ssh $vm2name
+
+#Kopiuje pliki lokalnie
+mkdir encrypted && mkdir decrypted && gsutil -m cp gs://zadanie42tk/* decrypted/
+
+#Koduję symetrycznie
+gcloud kms encrypt \
+--key $syncKey \
+--keyring $keyRing \
+--location global \
+--plaintext-file ~/decrypted/file01.txt \
+--ciphertext-file ~/encrypted/file01.txt.enc
+
+#Sprawdzam i działa
+tomasz@instance2:~$ ls encrypted/
+file01.txt.enc
+
+#Kopiuję plik na storage
+cp encrypted/file01.txt.enc gs://zadanie42tk/encrypted/
+```
+
+#### 2.7.4 Odszyfrowanie symetryczne
+```bash
+#Loguję się na maszynie nr 1
+gcloud compute ssh $vm1name
+
+#Odszyfrowanie pliku
+gcloud kms decrypt \
+--key $syncKey \
+--keyring $keyRing \
+--location global \
+--ciphertext-file encrypted/file01.txt.enc \
+--plaintext-file decrypted/file01.txt
+
+#Sprawdzam
+tomasz@instance1:~$ cat decrypted/file01.txt 
+We diminution prefer....
+```
+
+### 2.8 Usuwanie zaspbów
+```bash
+#usuwanie instancji
+gcloud compute instances delete instance1
+gcloud compute instances delete instance2
+
+#Usuwanie bucketa
+ gsutil rm -r gs://${bucketName}
+
+#Usuwanie Service account
+gcloud iam service-accounts delete $saEmail
+```
