@@ -307,7 +307,7 @@ gcloud kms keys versions get-public-key 1 \
 --location global \
 --output-file ~/asyncKey.pub
 
-#Szyfruję asynchronicznie 5 plików
+#Szyfruję asymetrycznie 5 plików
 files=$(ls ~/decrypted/)
 cd ~/decrypted/
 for f in $files ; do
