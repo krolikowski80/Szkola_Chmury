@@ -47,12 +47,9 @@ gcloud iam roles describe [role-id] \
 #Pokaż wszystkie role
 gcloud iam roles list
 
-
 #Wyświetl lisę ról niestandardowych
 gcloud iam roles list --project [PROJECT_ID]
-
-#Aby wyświetlić listę usuniętych ról, możesz również określić 
-    --show-deletedflagę.
+--show-deleted #Aby wyświetlić listę usuniętych ról
 
 #Update roli po naniesionych zmianach w pliku .yml
 gcloud iam roles update [ROLE_ID] \
@@ -76,4 +73,8 @@ gcloud iam roles delete [ROLE_ID] \
 #Cofanie usunięcia roli niestandardowej
 gcloud iam roles undelete [ROLE_ID] \
 --project [PROJECT_ID]
+
+gcloud [group] add-iam-policy-binding [resource] \
+--member=[TYPE_ACCOUNT]:[MEMBER] \
+--role=[ROLE_ID]
 ```
