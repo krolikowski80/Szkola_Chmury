@@ -407,3 +407,67 @@ gcloud compute instances delete instance2
 #Usuwanie Service account
 gcloud iam service-accounts delete $saEmail
 ```
+# 3. Zadanie 3
+> Firma zdecydowała się już na ostatni krok ... zbudowanie niestandardowej roli za pomocą, której połączą możliwości szyfrowania oraz odszyfrowywania danych za pomocą KMS oraz dostępu do danych w Cloud Storage na poziomie READ
+
+### 3.1 Tworzenie Service Account
+```bash
+#Zmienne
+saName="zadanie43tk"
+saEmail="zadanie43tk@szkola-chmury-tk.iam.gserviceaccount.com" #gcloud iam service-accounts list 
+
+#Tworzę Service Account
+gcloud iam service-accounts create $saName --display-name=$saName
+```
+### 3.2 Tworzenie roli niestandardowej
+```bash
+#Zmienne
+projectID=szkola-chmury-tk
+roleID=read_dec_enc
+roleDefinition=/home/tomasz/my_repos/Szkola_Chmury/dostep.yaml
+rolePath=projects/szkola-chmury-tk/roles/read_dec_enc #gcloud iam roles list --project $projectID
+
+
+#Tworzę pliku roli niestandardowej 
+title: "Dostep do kluczy i storage"
+description: "rola za pomocą, której konto ma  możliwości szyfrowania oraz odszyfrowywania danych za pomocą KMS oraz dostępu do 
+danych w Cloud Storage na poziomie READ"
+stage: "GA"
+includedPermissions:
+- storage.objects.get
+- storage.objects.list
+- cloudkms.cryptoKeyVersions.useToDecrypt
+- cloudkms.cryptoKeyVersions.useToEncrypt
+- cloudkms.cryptoKeyVersions.viewPublicKey
+
+#Tworzenie roli na podstawie pliku
+gcloud iam roles create $roleID \
+--project $projectID
+--file $roleDefinition
+
+#Sprawdzam role
+gcloud iam roles list --project $projectID
+
+#Bindowanie roli do SA
+gcloud projects add-iam-policy-binding $projectID \
+--member serviceAccount:$saEmail \
+--role $rolePath
+```
+
+### 3.3 Tworzenie bucketu
+```bash
+#Zmienne
+bucketName=zadanie43tk
+bucketLocation=us-central2
+
+#TGworzę bucket
+gsutil mb -l $bucketLocation gs://${bucketName}
+```
+
+
+
+DAlsze kroki
+
+utworzenie bucket
+utworzenie VM
+i testy

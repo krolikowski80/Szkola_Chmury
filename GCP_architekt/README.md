@@ -18,7 +18,7 @@
 
 * [Migration VM between regions/zones](./tydzien3/migration)
 
-* [Managing roles and permissions](./tydzien4/managig)
+* [Managing roles and permissions](./tydzien4/managing)
 
 * [Roles and Custom Roles](./tydzien4/customrole)
 
