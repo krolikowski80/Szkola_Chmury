@@ -213,7 +213,7 @@ keyRing="zad4ring"
 syncKey="synckey"
 asyncKey="asynckey"
 
-gcloud kms keyrings create serviceAccount\
+gcloud kms keyrings create $keyRing \
 --location=global
 
 # Utworzenie symetrycznego klucza do szyfrowania danych
@@ -463,11 +463,42 @@ bucketLocation=us-central2
 #TGworzę bucket
 gsutil mb -l $bucketLocation gs://${bucketName}
 ```
+### 3.4 Utworzenie VM
+```bash
+#Zmienne
+vmName=zad43vm
+
+#Tworzę VM
+gcloud compute instances create $vmName \
+--machine-type f1-micro \
+--zone=europe-west1-b \
+--service-account=$saEmail
+
+#logowanie i testy
+gcloud compute ssh $vmName
+
+#Kopiowanie pliku na storage
+echo "testowy plik" > test.txt && gsutil cp test.txt gs://zadanie43tk/
+  Copying file://test.txt [Content-Type=text/plain]...
+  AccessDeniedException: 403 Insufficient Permission      
+
+#A czytanie?
+tomasz@zad43vm:~$ gsutil cat gs://zadanie43tk/test.txt
+testowy plik
+
+#pobieranie klucza
+gcloud kms keys versions get-public-key 1 \
+--key $asyncKey  \
+--keyring $keyRing \
+--location global \
+--output-file ~/asyncKey.pub
+
+tomasz@zad43vm:~$ ls
+asyncKey.pub
+
+#próba stworzenia klucza
+gcloud kms keyrings create mynewkeyring --location global
+ERROR: (gcloud.kms.keyrings.create) PERMISSION_DENIED: Permission 'cloudkms.keyRings.create' denied on resource 'projects/szkola-chmury-tk/locations/global/keyRings/mynewkeyring' (or it may not exist).
+```
 
 
-
-DAlsze kroki
-
-utworzenie bucket
-utworzenie VM
-i testy

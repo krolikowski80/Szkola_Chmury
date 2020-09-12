@@ -74,7 +74,8 @@ gcloud iam roles delete [ROLE_ID] \
 gcloud iam roles undelete [ROLE_ID] \
 --project [PROJECT_ID]
 
-gcloud [group] add-iam-policy-binding [resource] \
+## Bindowanie roli do konta w grupie(project, keyring itp...)
+gcloud [group] add-iam-policy-binding [group-resource-ID] \
 --member=[TYPE_ACCOUNT]:[MEMBER] \
 --role=[ROLE_ID]
 ```
