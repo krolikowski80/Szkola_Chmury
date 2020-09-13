@@ -21,7 +21,13 @@
       * [2.7.3 Szyfrowanie symetryczne](#273-Szyfrowanie-symetryczne)
       * [2.7.4 Odszyfrowanie symetryczne](#274-Odszyfrowanie-symetryczne])
     * [2.8 Usuwanie zaspbów](#28-Usuwanie-zaspbów)
-        
+* [3. Zadanie 3](#3-zadanie-3)()
+    * [3.1 Tworzenie Service Account](#31-Tworzenie-Service-Account)
+    * [3.2 Tworzenie roli niestandardowej](#32-Tworzenie-roli-niestandardowej)
+    * [3.3 Tworzenie bucketu](#33-Tworzenie-bucketu)
+    * [3.4 Utworzenie VM](#34-Utworzenie-VM)
+    * [3.5 Logowanie się i testy](#35-logowanie-się-i-testy)
+    * [3.6 Usuwanie zaspbów](#36-Usuwanie-zaspbów)
 # 1. Zadanie 1
 
 > Klient poprosił cię o przygotowanie maszyny dla swoich pracowników, którzy będą mogli pobierać faktury z przygotowanego repozytorium (w naszym przypadku jest to pojemnik Cloud Storage)
@@ -473,8 +479,11 @@ gcloud compute instances create $vmName \
 --machine-type f1-micro \
 --zone=europe-west1-b \
 --service-account=$saEmail
+```
 
-#logowanie i testy
+### 3.5 logowanie się i testy
+```bash
+#Logowanie
 gcloud compute ssh $vmName
 
 #Kopiowanie pliku na storage
@@ -500,5 +509,17 @@ asyncKey.pub
 gcloud kms keyrings create mynewkeyring --location global
 ERROR: (gcloud.kms.keyrings.create) PERMISSION_DENIED: Permission 'cloudkms.keyRings.create' denied on resource 'projects/szkola-chmury-tk/locations/global/keyRings/mynewkeyring' (or it may not exist).
 ```
+### 3.5 Usuwanie zasobów
+```bash
+#usuwanie instancji
+gcloud compute instances delete $vmName
+
+#Usuwanie bucketa
+gsutil rm -r gs://$bucketName
+
+#Usuwanie Service account
+gcloud iam service-accounts delete $saEmail
+```
+
 
 
