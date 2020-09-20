@@ -14,6 +14,14 @@
 
 * [Docker registry](./tydzien3/registry)
 
+* [Docker - Ćwiczenia](./tydzien3/qw)
+
+* [Praca z kubectl](./tydzien4/kubctl)
+
+* [Azure Kubernetes Service](./tydzien4/aks)
+
+* [Google Kubernetes Engine](./tydzien4/gke)
+
 ## Zadania
 
 * [Zadanie nr2 - Docker](./zadanie2)
