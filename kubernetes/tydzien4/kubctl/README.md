@@ -46,5 +46,5 @@ kubectl logs hello
 kubectl describe node/minikube | more
 
 #Przęłączanie pomiędzy klastrami
-kubectl config set-context [NAME
+kubectl config set-context [NAME]
 ```

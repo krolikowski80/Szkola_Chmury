@@ -26,4 +26,6 @@
 
 * [Zadanie nr2 - Docker](./zadanie2)
 
-* [Zadanie nr3 - Docker Registry](./zadanie3) 
+* [Zadanie nr3 - Docker Registry](./zadanie3)
+
+* [Zadanie nr4 - Klaster Kubernetes](./zadanie4)
