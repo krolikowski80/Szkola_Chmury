@@ -27,3 +27,7 @@
 * [Cloud Organization Policy Service and Constraints](./tydzien4/organization_pol)
 
 * [Working with Cryptographic Keys](./tydzien4/crypto_key)
+
+* [Managed Instance Groups](./tydzien5/mig)
+
+* [Instance Templates](./tydzien4/it)
