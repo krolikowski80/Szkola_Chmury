@@ -190,7 +190,7 @@ rm -rf nodejs-docs-samples/
 
 gcloud container clusters delete $clusterName
 
-gcloud docker -- rm gcr.io/$projectID/hello-node
+gcloud docker -- rmi gcr.io/$projectID/hello-node:1.0
 
 docker rm $(docker ps -aq)
 
