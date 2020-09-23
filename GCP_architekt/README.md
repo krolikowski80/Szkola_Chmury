@@ -31,3 +31,5 @@
 * [Managed Instance Groups](./tydzien5/mig)
 
 * [Instance Templates](./tydzien4/it)
+
+* [Rolling Updates](./tydzien4/ra)
