@@ -16,6 +16,8 @@
 
 * [Creating Snapshot](./tydzien3/snapshot)
 
+* [Startup Script](./tydzien3/startupscript)
+
 * [Migration VM between regions/zones](./tydzien3/migration)
 
 * [Managing roles and permissions](./tydzien4/managing)
