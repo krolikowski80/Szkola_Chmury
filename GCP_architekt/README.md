@@ -30,6 +30,8 @@
 
 * [Managed Instance Groups](./tydzien5/mig)
 
-* [Instance Templates](./tydzien4/it)
+* [Instance Templates](./tydzien5/it)
 
-* [Rolling Updates](./tydzien4/ra)
+* [Rolling Updates](./tydzien5/ra)
+
+* [Canary Testing ](./tydzien5/ct)
