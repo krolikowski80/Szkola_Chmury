@@ -250,10 +250,10 @@ do
 done
 
 ...
-Simulating high load for instance webserver-eu-group-nm8g
-Simulating high load for instance webserver-eu-group-7fdt
-Simulating high load for instance webserver-eu-group-pcsd
-Simulating high load for instance webserver-eu-group-r66j
+Simulating low load for instance webserver-eu-group-nm8g
+Simulating low load for instance webserver-eu-group-7fdt
+Simulating low load for instance webserver-eu-group-pcsd
+Simulating low load for instance webserver-eu-group-r66j
 
 #po około 10 min:
 gcloud compute instances list --filter $migEUname
