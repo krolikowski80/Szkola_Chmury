@@ -40,7 +40,7 @@ Specjaliści starali się zwiększać na bieżąco parametry maszyn wirtualnych,
 
 ![Autohealing](./img/awaria.png "Autohealing")
 </details><br>
-5. Przy wdrażaniu nowych wersji zastosowany będzie canary testing. Czyli na samym początku wymienimy tylko jedną VM, w jednej strefie. Jeżeli nowa wersja okaże się sprawną, można przystąpić do wymiany reszty. Dzięki takiemu rozwiązaniu unikniemy kłopotów na wielką skale. Nie udane update będzię można bardzo szybko przywrócić do poprzedniego stanu, nie zakłócając pracy reszty VM.
+5. Przy wdrażaniu nowych wersji zastosowany będzie canary testing. Czyli na samym początku wymienimy tylko jedną VM, w jednej strefie. Jeżeli nowa wersja okaże się sprawną, można przystąpić do wymiany reszty. Dzięki takiemu rozwiązaniu unikniemy kłopotów na wielką skale. Nie udane update będzię można bardzo szybko przywrócić do poprzedniego stanu, nie zakłócając pracy reszty VM. Wzorzec aktualizacji wygląda identycznie jak Autohealing z tąróżnicą, że tutaj świadomie dopudzczamy do stytuacjio, gdzie jedna z maszyn nie działa.
 <details>
   <summary><b><i>Wzorzec aktualizacji</i></b></summary>
 
@@ -182,7 +182,7 @@ webserver-eu-group-p0pw  europe-west1-b  RUNNING  HEALTHY       NONE    zad5-tem
 webserver-eu-group-7fdt  europe-west1-c  RUNNING  HEALTHY       NONE    zad5-template-1
 webserver-eu-group-vkc2  europe-west1-d  RUNNING  HEALTHY       NONE    zad5-template-1
 
-#Sprawdzam ponownie dresy instancji w grupie. 1 Instancja ma nowy nr ip
+#Sprawdzam ponownie dresy instancji w grupie. 1 Instancja ma nowy adres ip
 gcloud compute instances list --filter $migEUname
 
 NAME                     ZONE            MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP    EXTERNAL_IP     STATUS
@@ -299,8 +299,8 @@ gcloud compute instance-groups managed rolling-action start-update $migEUname \
 ERROR: (gcloud.compute.instance-groups.managed.rolling-action.start-update) Could not fetch resource:
  - Invalid value for field 'resource.updatePolicy.maxUnavailable.percent': '100'. Percent updatePolicy.maxUnavailable for regional managed instance group is only allowed for regional managed instance groups with size at least 10.
 
-#Dla MIG regionalnych, nie da się ustawić flagi --max-unavailable na wartośc 100% dla grup poniżej 10 maszyn 
-# Nie da się ustawić żadnje wartości dla tej flagi.
+#Dla MIG regionalnych, nie da się ustawić flagi --max-unavailable na wartośc 100% w przypadku grup poniżej 10 maszyn 
+# W takim przypadku nie da się ustawić żadnje wartości dla flagi --max-unavailable.
 
 #Jeszcze raz
 gcloud compute instance-groups managed rolling-action start-update $migEUname \
@@ -322,3 +322,17 @@ webserver-eu-group-qb3q  europe-west1-d  RUNNING                NONE    zad5-tem
 
 ![Wynik update](./img/update.png "Wynik update")
 </details><br>
+
+#### Usunięcie zasobów
+```bash
+# Usuwanie MIG
+gcloud compute instance-groups managed delete $migEUname \
+    --region $migEUregion
+
+# Usuwanie health-checks
+gcloud compute health-checks delete $healthChecker
+
+#Usuwanie template
+gcloud compute instance-templates delete $template1
+gcloud compute instance-templates delete $template2
+```
