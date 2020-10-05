@@ -1,0 +1,17 @@
+export projectID=szkola-chmury-tk
+export account=t.krolikowski@gmail.com
+
+#Dla template
+export template1=zad5-template-1
+export template2=zad5-template-2
+
+#Dla autohealing
+export healthChecker=autohealer-check
+
+#Dla MIG
+export migEUname=webserver-eu-group
+export migEUregion=europe-west1
+
+export migUSname=webserver-us-group
+export migUSregion=us-central1
+
