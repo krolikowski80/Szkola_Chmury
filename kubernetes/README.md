@@ -1,7 +1,6 @@
 
 # [Kubernetes dla każdego – sztuka konteneryzacji](https://szkolachmury.pl/kubernetes/)
-
-
+## [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 ## Lekcje
 
 * [Obraz i kontener](./tydzien2)
@@ -21,6 +20,16 @@
 * [Azure Kubernetes Service](./tydzien4/aks)
 
 * [Google Kubernetes Engine](./tydzien4/gke)
+
+* [Namespaces](./tydzien5/ns)
+
+* [POD](./tydzien5/pod)
+
+* [Replica Set](./tydzien5/rs)
+
+* [Stateful Set & DemonSet](./tydzien5/ssd)
+
+* [Deployment](./tydzien5/deploy)
 
 ## Zadania
 
