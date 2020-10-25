@@ -71,7 +71,7 @@ kubectl port-forward $pod_name 8080:80
 http://localhost:8080
 #i jest 'ekran startowy' Nginx
 ```
-# Zadanie 5.1.4 Stworzenie drugiego POD dla TEST.
+## Zadanie 5.1.4 Stworzenie drugiego POD dla TEST.
 ```bash
 #Zmienne
 echo $'\nexport pod_name_test=my-nginx-test' >>.zad5_env  && source .zad5_env
