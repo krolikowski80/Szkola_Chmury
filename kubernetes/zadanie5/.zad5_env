@@ -1,0 +1,11 @@
+
+#Podstawowe
+export clusterName=zad5tk
+export nameSpace=homework5
+
+#Dla POD
+export pod_name=my-nginx-prod
+
+export pod_name_test=my-nginx-test
+
+export my_deployment_name=nginx-deployment
