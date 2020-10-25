@@ -40,3 +40,5 @@
 * [Zadanie nr3 - Docker Registry](./zadanie3)
 
 * [Zadanie nr4 - Klaster Kubernetes](./zadanie4)
+
+* [Zadanie nr5 - Bazowe obiekty w Kubernetes](./zadanie5)

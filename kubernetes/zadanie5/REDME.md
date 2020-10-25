@@ -250,4 +250,7 @@ nslookup web-1.nginx
 
 #Usuwanie zasobów
 kubectl delete namespace
+
+#Albo
+gcloud container clusters delete $clusterName
 ```
