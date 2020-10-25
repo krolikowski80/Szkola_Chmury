@@ -31,6 +31,8 @@
 
 * [Deployment](./tydzien5/deploy)
 
+* [Services](./tydzien5/srv)
+
 ## Zadania
 
 * [Zadanie nr2 - Docker](./zadanie2)
