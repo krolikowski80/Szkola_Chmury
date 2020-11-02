@@ -1,4 +1,4 @@
-# [Zadanie 4](https://szkolachmury.pl/google-cloud-platform-droga-architekta/tydzien-5-instance-groups-i-autoskalowanie/zadanie-domowe-nr-5/)
+# [Zadanie 5](https://szkolachmury.pl/google-cloud-platform-droga-architekta/tydzien-5-instance-groups-i-autoskalowanie/zadanie-domowe-nr-5/)
 
 Zarząd MountKirk zdecydował, że wypuszczając swoją nową grę na rynek skorzystają z gotowego rozwiązania w Google Cloud jakim jest Compute Engine. firma postanowiła również wprowadzić nową aplikację dla graczy, którą również chcą oprzeć na tym rozwiązaniu.
 
