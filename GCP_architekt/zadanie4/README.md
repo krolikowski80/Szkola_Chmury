@@ -54,8 +54,7 @@ gs://zadanie4tk/file05.txt
 ```
 
 ### 1.2 Przygotowanie `VM`
->Domyślne ustawienia Cloud API access scopes dla nowo tworzonego VM są takie, że maszyna ma dostęp do bucet w trybie "Read Only". Wiec nie ma co tu majstrować.
-Service account też zostanie domyślne.
+>Domyślne ustawienia Cloud API access scopes dla nowo tworzonego VM są takie, że maszyna ma dostęp do bucet w trybie "Read Only". Wiec nie ma co tu majstrować. Service account też zostanie domyślne.
 ```bash
 #Zmienne
 vmName="vmzadanienr4tk" #lokacja brana z configuracji projektu

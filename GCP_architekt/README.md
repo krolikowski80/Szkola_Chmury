@@ -9,6 +9,9 @@
 
 * [Zadanie 4 - Cloud identity and access management](./zadanie4)
 
+* [Zadanie 5 - Instance groups i autoskalowanie](./zadanie5)
+
+* [Zadanie 6 - Cloud storage](./zadanie6)
 
 ## Lekcje
 
@@ -37,3 +40,11 @@
 * [Rolling Updates](./tydzien5/ra)
 
 * [Canary Testing ](./tydzien5/ct)
+
+* [Cloud Storage - Basic](./tydzien6/basic)
+
+* [Cloud Storage - IAM](./tydzien6/iam)
+
+* [Regulating Storage Access](./tydzien6/rsa)
+
+* [Object Versioning and Lifecycle Management](./tydzien6/ver)
