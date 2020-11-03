@@ -225,6 +225,7 @@ gsutil lifecycle get gs://$bucketName
 }
 ```
 </details><br>
+
 ```bash
 # Ustawienie polityki
 gsutil lifecycle set lifecycle.json gs://$bucketName
