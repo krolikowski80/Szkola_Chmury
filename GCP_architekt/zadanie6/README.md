@@ -1,20 +1,22 @@
 # [Zadanie 6](https://szkolachmury.pl/google-cloud-platform-droga-architekta/tydzien-6-cloud-storage/zadanie-domowe-nr-6/)
 
-1. Pobierz dane ze wskazanego linku na swój komputer / maszynę wirtualną w chmurze.
+- Pobierz dane ze wskazanego linku na swój komputer / maszynę wirtualną w chmurze.
 https://storage.googleapis.com/testdatachm/sampledata/imagedata.tar.gz
-2. Rozpakuj zdjęcia.
-3. Stwórz odpowiednie konto storage.
-4. Skopiuj dane z zachowaniem struktury katalogów (najlepiej w trybie równoległym).
-5. Stwórz odpowiednią metodę dostępu do plików dla zewnętrznej firmy, tak aby mogli dostać się do plików bez konieczności zakładania dedykowanych kont.
-6. Wprowadź odpowiednie zasady zarządzania cyklem zycia plików, tak aby spełniały wymagania zawarte powyej.
-
+- Rozpakuj zdjęcia.
+- Stwórz odpowiednie konto storage.
+- Skopiuj dane z zachowaniem struktury katalogów (najlepiej w trybie równoległym).
+- Stwórz odpowiednią metodę dostępu do plików dla zewnętrznej firmy, tak aby mogli dostać się do plików bez konieczności zakładania dedykowanych kont.
+- Wprowadź odpowiednie zasady zarządzania cyklem zycia plików, tak aby spełniały wymagania zawarte poniżej.
+    - po 60 dniach pliki będą przenoszone do tańszego storage'a (Nearline)
+    - po 90  dziach usuwane
+      - soft-delete, który pozwala jeszcze do 10 dni po usunięciu pliku na jego odzyskanie
 ---
 >Oczywiście zacznę od stworzenia pliku dla zmiennych i automatycznego go ładowania w .bashrc
 
 Potrzebne zasoby:
-1. bucket
-2. VM dla admina (pozoracja środowiska on prem firmy) oraz service account do obsługi.
-4. Odpowiednie uprawnienia do odczyt/zapis dla VM firmy i tylko odczyt dla całej reszty
+- bucket
+- VM dla admina (pozoracja środowiska on prem firmy) oraz service account do obsługi.
+- Odpowiednie uprawnienia do odczyt/zapis dla VM firmy i tylko odczyt dla całej reszty
   - https://cloud.google.com/storage/docs/access-control/
   - https://cloud.google.com/storage/docs/access-control/making-data-public#gsutil_1
     - Dostęp do tego łącza nie wymaga uwierzytelniania. Nadaje się na przykład jako łącze na stronie internetowej lub do pobrania za pomocą narzędzia wiersza poleceń, takiego jak cURL.
@@ -162,8 +164,62 @@ gsutil cp testdatachm/fungs/fung145.jpg gs://billing_bucket_tk/
 
 ![Podgląd jednego pliku](jeden_plik.png "Podgląd jednego pliku ")
 </details><br>
+### 3. Polityka życia plików
+```bash
+#Ustawiem wersjonowanie
+gsutil versioning set on gs://$bucketName
 
+#Zobaczy co mamy
+gsutil lifecycle get gs://$bucketName
+  gs://tk-zadanie6/ has no lifecycle configuration.  #Czyli nic ;>
+```
+<details>
+  <summary><b><i>lifecycle.json</i></b></summary>
 
+```json
+{
+    "lifecycle": {
+        "rule": [
+            {
+                "action": {
+                    "type": "SetStorageClass",
+                    "storageClass": "NEARLINE"
+                },
+                "condition": {
+                    "age": 60,
+                    "matchesStorageClass": [
+                        "MULTI_REGIONAL",
+                        "STANDARD",
+                        "DURABLE_REDUCED_AVAILABILITY"
+                    ]
+                }
+            },
+            {
+                "action": {
+                    "type": "Delete"
+                },
+                "condition": {
+                    "age": 90,
+                    "isLive": true,
+                    "matchesStorageClass": [
+                      "NEARLINE"
+                    ]
+                }
+            },
+            {
+                "action": {
+                    "type": "Delete"
+                },
+                "condition": {
+                    "age": 10,
+                    "isLive": false
+                }
+            }
+        ]
+    }
+}
+```
+</details><br>
 
 
 gsutil rm -r gs://my-awesome-bucket
