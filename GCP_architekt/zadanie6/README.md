@@ -167,6 +167,7 @@ gsutil cp testdatachm/fungs/fung145.jpg gs://billing_bucket_tk/
 
 ![Podgląd jednego pliku](jeden_plik.png "Podgląd jednego pliku ")
 </details><br>
+
 ### 3. Polityka życia plików
 ```bash
 #Ustawiem wersjonowanie
@@ -241,3 +242,4 @@ gcloud compute instances delete $vmName \
 
 #Usuwam SA
 gcloud iam service-accounts delete $saEmail
+```
