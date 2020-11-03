@@ -113,7 +113,7 @@ gcloud compute instances create $vmName \
 --scopes https://www.googleapis.com/auth/devstorage.read_write
 ```
 
-### 3 Test uprawnień
+### 3. Test uprawnień
 
 ```bash
 #Loguję się na VM i sprawdzam uprawnienia
@@ -122,6 +122,7 @@ gcloud compute ssh  $vmName \
 
 #Sprawdzam listę bucketów
 gsutil ls
+
   AccessDeniedException: 403 adminserviceaccount@szkola-chmury-tk.iam.gserviceaccount.com does not have storage.buckets.list access to the Google Cloud project.
 
 #Instaluję wget
@@ -135,11 +136,13 @@ tar -zxvf imagedata.tar.gz
 
 #Kopiuję pliki równolegle (wielowątkowo) z zachowaniem struktury katalogów
 gsutil -m cp -r testdatachm/** gs://tk-zadanie6/
+
   - [964/964 files][ 73.6 MiB/ 73.6 MiB] 100% Done   2.2 MiB/s ETA 00:00:00       
   Operation completed over 964 objects/73.6 MiB.         
 
 #lista plików
 gsutil ls gs://tk-zadanie6/
+
   gs://tk-zadanie6/fungs/
   gs://tk-zadanie6/garden/
   gs://tk-zadanie6/homeplants/
@@ -171,6 +174,7 @@ gsutil versioning set on gs://$bucketName
 
 #Zobaczy co mamy
 gsutil lifecycle get gs://$bucketName
+
   gs://tk-zadanie6/ has no lifecycle configuration.  #Czyli nic ;>
 ```
 <details>
@@ -220,6 +224,20 @@ gsutil lifecycle get gs://$bucketName
 }
 ```
 </details><br>
+```bash
+# Ustawienie polityki
+gsutil lifecycle set lifecycle.json gs://$bucketName
 
+  Setting lifecycle configuration on gs://tk-zadanie6/...
+```
+### 4. Usuwanie zasobów - za kilka dni ;>
+```bash
+#Usuwam storage
+gsutil rm -r gs://$bucketName
 
-gsutil rm -r gs://my-awesome-bucket
+#Usuwam VM
+gcloud compute instances delete $vmName \
+--zone $vmZone
+
+#Usuwam SA
+gcloud iam service-accounts delete $saEmail
