@@ -13,6 +13,8 @@
 
 * [Zadanie 6 - Cloud storage](./zadanie6)
 
+* [Zadanie 7 - Databases on Google Cloud](./zadanie7)
+
 ## Lekcje
 
 * [Podstawy pracy w GCP](./tydzien2)
@@ -48,3 +50,5 @@
 * [Regulating Storage Access](./tydzien6/rsa)
 
 * [Object Versioning and Lifecycle Management](./tydzien6/ver)
+
+* [Databases](./tydzien7)
