@@ -52,3 +52,7 @@
 * [Object Versioning and Lifecycle Management](./tydzien6/ver)
 
 * [Databases](./tydzien7)
+
+* [Deploying Applications](./tydzien8)
+
+    * [Qwiklabs - Deploying Applications](./tydzien8/qwiklabs)
