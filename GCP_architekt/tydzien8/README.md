@@ -9,3 +9,5 @@
 ## [Standard vs Flexible.](https://cloud.google.com/appengine/docs/the-appengine-environments)
 
 ## [Overall comparison.](https://medium.com/@venkat86.careers/how-to-choose-app-engine-environment-standard-flexible-9f4c26a723b0)
+
+## [Create a Second Generation Cloud SQL instance.](https://cloud.google.com/sql/docs/mysql/create-instance)

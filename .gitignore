@@ -6,8 +6,12 @@
 
 /.idea/*
 sample_data/
-szkola_chmury.code-workspace
+*.code-workspace
 *.json
 *.yml
 *.yaml
 materials/
+.gcloudignore
+.python-version
+flex/
+standard/
