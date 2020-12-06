@@ -13,5 +13,5 @@ sample_data/
 materials/
 .gcloudignore
 .python-version
-flex/
+flexible/
 standard/
