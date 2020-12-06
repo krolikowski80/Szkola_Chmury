@@ -15,6 +15,8 @@
 
 * [Zadanie 7 - Databases on Google Cloud](./zadanie7)
 
+* [Zadanie 8 - App Engine](./zadanie8)
+
 ## Lekcje
 
 * [Podstawy pracy w GCP](./tydzien2)
