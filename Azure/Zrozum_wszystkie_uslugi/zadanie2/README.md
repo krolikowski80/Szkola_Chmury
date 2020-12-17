@@ -4,7 +4,7 @@
 Następnie uruchomienie go i wystawienie aplikacji on public używając do tego:
  - Virual Machine
  - Azure Container Instance
-- Kubernetes (niedługo)
+ - Kubernetes (wkrótce)
 
 ## Krok 1 - Pobranie obrazu z DH i umieszczenie w ACR 
 ```bash
