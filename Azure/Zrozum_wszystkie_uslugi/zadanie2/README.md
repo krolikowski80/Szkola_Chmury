@@ -1,9 +1,10 @@
 # [Zadanie nr 2](https://szkolachmury.pl/microsoft-azure-zrozum-wszystkie-uslugi/tydzien-2-compute-containers/lekcja-11-praca-domowa/)
 
 > Zadanie polega na pobraniu [obrazu](https://hub.docker.com/r/pengbai/docker-supermario/) z Docher Hub i umieszczenie go w Azure Container Registry.
-Następnie uruchomienie go i wystawienie aplikacji on public używając do rego:
+Następnie uruchomienie go i wystawienie aplikacji on public używając do tego:
  - Virual Machine
  - Azure Container Instance
+- Kubernetes (niedługo)
 
 ## Krok 1 - Pobranie obrazu z DH i umieszczenie w ACR 
 ```bash
