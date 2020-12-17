@@ -76,9 +76,9 @@ az vm create \
 --admin-username $azureuser \
 --generate-ssh-keys
 
-#Otwieram port 80
+#Otwieram port 8080
 az vm open-port \
---port 8600 \ #Tak będę mapował poirty 8600:8080
+--port 8600 \ #Tak będę mapował porty 8600:8080
 --resource-group $myResourceGroup \
 --name $myVM
 
