@@ -4,7 +4,6 @@
 Następnie uruchomienie go i wystawienie aplikacji on public używając do rego:
  - Virual Machine
  - Azure Container Instance
- - Azure Kubernetes Service
 
 ## Krok 1 - Pobranie obrazu z DH i umieszczenie w ACR 
 ```bash
