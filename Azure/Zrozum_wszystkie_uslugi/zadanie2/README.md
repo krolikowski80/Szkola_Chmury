@@ -117,7 +117,7 @@ az container create \
 --image $containerRegistryName.azurecr.io/supermario:v1 \
 --ports 8080 \
 --dns-name-label $dnsLabel \
---location eastus $locateResourceGroup #taka sama jak resource grupy
+--location $locateResourceGroup #taka sama jak resource grupy
 --registry-username $userName \
 --registry-password $registryPassword
 
@@ -127,3 +127,6 @@ az container delete \
 --name $containerName
 ```
 > Jak widać 2 metoda jest szybsza i przyjemniejsza.
+
+## 2.3 Kubernetes
+### Wkrótce
