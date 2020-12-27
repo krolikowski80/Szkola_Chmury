@@ -108,6 +108,9 @@ export vm3=myVM3
 
 export avset=myAvSet
 
+export azureuser=krolikowski
+export azurepass=MegaTAjnEhaslo#12345
+
 #Tworzę 3 interfejsy sieciowe dla moich VMek i umieszczam je w mojej VNET-subnet i NSG
 
 #https://docs.microsoft.com/en-us/cli/azure/network/nic?view=azure-cli-latest
