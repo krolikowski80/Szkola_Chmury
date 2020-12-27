@@ -88,7 +88,7 @@ ssh $azureuser@51.105.42.126
 #Instaluję docker zgodnie z https://docs.docker.com/engine/install/debian/
 #oraz https://docs.docker.com/engine/install/linux-postinstall/
 
-#Loguje się do rejestru
+#Loguje się do rejestru -- A można zalogować się przez docker login ??
 az acr login \
 --name $containerRegistryName \
 -u $userName -p $registryPassword #Tu już muszę podać login i hasło
