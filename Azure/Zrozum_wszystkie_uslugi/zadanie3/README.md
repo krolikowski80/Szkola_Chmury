@@ -182,7 +182,7 @@ https://docs.docker.com/engine/install/linux-postinstall/
 # Tworzę prosty dockerfile
 docker login
 docker build -t webserver .
-docker run -it --rm -d -p 8080:80 --name web webserver
+docker run -it --rm -d -p 80:80 --name web webserver
 
 #Czynność powtarzam na VM2 i VM3
 ```
