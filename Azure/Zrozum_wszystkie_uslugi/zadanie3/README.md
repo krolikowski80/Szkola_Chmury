@@ -266,4 +266,66 @@ az network public-ip show \
 
 ### Działa aż miło ;)
 ```
-## 5. Druga - Awaryjna podcsieć
+> Drugą część zadania wykonm dla odmiany w portalu.
+> Będzie to stworzenie:
+  * Nowa, Europejsja resource grupa
+  * nowego  VNET
+  * kolejnej Virtual Machine z obrazem Nginx
+  * Net trafic, który skieruje tu ruch w przypadku awarii podstawowego VNET
+
+## 5. Tworzenie profilu Traffic Manager przy użyciu Azure Portal
+<details>
+  <summary><b><i>Tworzę Resource Group</i></b></summary>
+
+![REsurce Group](./files/img/resource.png "REsurce Group")
+</details>
+
+<details>
+  <summary><b><i>Tworzę kolejny VNET wraz z Subnet</i></b></summary>
+
+![VNET](./files/img/VNET.png "VNET")
+
+</details>
+
+<details>
+  <summary><b><i>Tworzę Virtual Machine z Dockerem i szybkim serwisem na nginx z dockerowego obrazu</i></b></summary>
+
+![VM](./files/img/VM.png "VM")
+![VM](./files/img/vm1.png "VM")
+
+</details>
+
+<details>
+  <summary><b><i>Tworzę Traffic Manager i dwa endpointy</i></b></summary>
+
+![VM](./files/img/Trafficmgr.png "Traffic manager")
+![VM](./files/img/Trafficmgr_ep.png "Endpoint")
+
+</details>
+
+<details>
+  <summary><b><i>I na koniec testy</i></b></summary>
+
+![VM](./files/img/wersja3.png "Wersja 3 strony z Load Balancera ")
+
+  > Po usunięciu load Balancera Traffic menager wrzuca już stronę awaryjną.
+
+![VM](./files/img/awaria.png "Wersja AWARIA po usunięciu LB")
+
+</details>
+
+<details>
+  <summary><b><i>Dashboard</i></b></summary>
+  > A tak to wygląda w dashboardzie
+
+![VNET](./files/img/dashboard.png "VNET")
+
+</details>
+
+---
+### Wnioski!!
+  * W portalu też da się pracować, ale czy jest szybciej?
+  * Pierwszy i ostatni raz zrobiłem VM z hasłem zamiast klucza
+  * Zarządzanie gupą kontenerów - każdym sobie z osobna to jest jakiś dramat. Jeśl nie można k8S to swarm.
+  * Chcę przetestować App Gateway i porównać z Load Balancer - podobno jest lpszy.
+  * Gdzie się wstawia skrypty startowe do VM ?
