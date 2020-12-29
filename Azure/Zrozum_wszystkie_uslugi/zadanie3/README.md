@@ -32,7 +32,6 @@ export nsgRule=myNSGRuleHTTP
 # Resource grpup
 # https://docs.microsoft.com/en-us/cli/azure/ad/group?
 az group create \
-view=azure-cli-latest
 --name $myResourceGroup1 \
 --location $usa
 

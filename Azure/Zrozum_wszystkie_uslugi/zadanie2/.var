@@ -1,10 +1,17 @@
-export myResourceGroup=krolik
+
 export locateResourceGroup=uksouth
 export containerRegistryName=szkolachmurykrolikowski
-export registryPassword=mojeTajneHasloKtoreTutajZmienilem
+export registryPassword=
 export userName=szkolachmurykrolikowski
 export containerName=mariocont
 export dnsLabel=mariodns
 export myVM=krolikowskivm
 export azureuser=krolik
 export myAKSCluster=marioclustertest
+
+
+#############
+
+export newResourceGroup=zadnie2k8s
+export region=northeurope
+export klusterName=myAKSCluster
