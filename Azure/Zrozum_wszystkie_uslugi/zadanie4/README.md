@@ -47,7 +47,8 @@ az appservice plan create \
 ## Docker Compose z kontenerami WordPress i MySQL
 ```bash
 # Tworzenie aplikacji narzędzia Docker Compose
-# Wielokontenerowa aplikacja internetowa w ramach planu usługi App Service. docker-compose-wordpress.yml znajduje się w katalogi z demo zaciągniętym z gita. 
+# Wielokontenerowa aplikacja internetowa w ramach planu usługi App Service. 
+# docker-compose-wordpress.yml znajduje się w katalogi z demo zaciągniętym z gita. 
 # Tylko czemy yml anie yaml, to pewnie już tylko Bill wie.
 az webapp create \
 --resource-group $myResourceGroup \
