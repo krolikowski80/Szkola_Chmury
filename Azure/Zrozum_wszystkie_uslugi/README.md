@@ -4,3 +4,5 @@
 * [Zadanie nr 2 - Compute&Containers](./zadanie2)
 
 * [Zadanie nr 3 - Networking](./zadanie3)
+
+* [Zadanie nr 4 - Storage and databases](./zadanie4)

@@ -1,0 +1,12 @@
+export myResourceGroup=zadanie4tk
+export location=germanywestcentral
+
+export planName=myAppServicePlan
+export appName=szkolachmuryzad4
+
+export mySQLname=zadanie4-mysql-base
+export dbName=wordpress
+export AzureIPs=allAzureIPs
+
+export sqlAdminUser=adminuser
+export wordpress_db_host=zadanie4-mysql-base.mysql.database.azure.com
