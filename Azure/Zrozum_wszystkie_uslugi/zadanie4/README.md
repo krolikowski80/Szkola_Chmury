@@ -19,7 +19,6 @@ export myResourceGroup=zadanie4tk
 export location=germanywestcentral
 
 export planName=myAppServicePlan
-export appName=szkolachmuryzad4
 
 # Grupa zasobów
 az group create \
@@ -46,6 +45,9 @@ az appservice plan create \
 
 ## Docker Compose z kontenerami WordPress i MySQL
 ```bash
+# Zmienne
+export appName=szkolachmuryzad4
+
 # Tworzenie aplikacji narzędzia Docker Compose
 # Wielokontenerowa aplikacja internetowa w ramach planu usługi App Service. 
 # docker-compose-wordpress.yml znajduje się w katalogi z demo zaciągniętym z gita. 
@@ -65,10 +67,9 @@ az webapp create \
     ],
 ...
 # Ale jak się zgubi to --query pomoże
-az webapp show -g $myResourceGroup -n $appName --query hostNames
-[
-  "szkolachmuryzad4.azurewebsites.net"
-]
+az webapp show -g $myResourceGroup -n $appName --query hostNames -o tsv
+
+szkolachmuryzad4.azurewebsites.net
 ```
 ## Nawiązywanie połączenia z produkcyjną bazą danych
 ```bash
