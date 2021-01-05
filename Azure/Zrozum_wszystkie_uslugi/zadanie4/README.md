@@ -143,7 +143,7 @@ az webapp config show -g $myResourceGroup -n $appName
 #Precyzyjniej
 az webapp config appsettings list  \
 -g $myResourceGroup \ # -g = --resource-group
--n $appName \ # -m = --mame
+-n $appName \ # -n = --name
 --query '[].{Name:name, Value:value}' -o table
 
 Name                   Value
