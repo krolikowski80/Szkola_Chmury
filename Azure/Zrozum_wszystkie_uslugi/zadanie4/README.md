@@ -30,9 +30,10 @@ az group show --resource-group  $myResourceGroup --query 'id' -o json
 
 "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/zadanie4tk"
 
-group show --resource-group  $myResourceGroup --query 'name' -o json
+az group show --resource-group  $myResourceGroup --query 'name' -o json
 
 "zadanie4tk"
+
 ## Fajne narzęzie np do tworzenia zmienych
 
 #App Service
@@ -50,8 +51,8 @@ export appName=szkolachmuryzad4
 
 # Tworzenie aplikacji narzędzia Docker Compose
 # Wielokontenerowa aplikacja internetowa w ramach planu usługi App Service. 
-# docker-compose-wordpress.yml znajduje się w katalogi z demo zaciągniętym z gita. 
-# Tylko czemy yml anie yaml, to pewnie już tylko Bill wie.
+# docker-compose-wordpress.yml znajduje się w katalogu z demo zaciągniętym z gita. 
+# Tylko czemu yml anie yaml, to pewnie już tylko sam Bill wie.
 az webapp create \
 --resource-group $myResourceGroup \
 --plan $planName \
@@ -67,7 +68,7 @@ az webapp create \
     ],
 ...
 # Ale jak się zgubi to --query pomoże
-az webapp show -g $myResourceGroup -n $appName --query hostNames -o tsv
+az webapp show -g $myResourceGroup -n $appName --query hostNames -o tsv # zwracane bez "" jest lepsze do amiennych
 
 szkolachmuryzad4.azurewebsites.net
 ```
@@ -94,7 +95,8 @@ az mysql server create \
 echo "export sqlAdminUser=$(az mysql server show -n $mySQLname -g $myResourceGroup --query administratorLogin -o tsv)" >> ../.var
 
 # Firewall
-# Tworzę regułę zapory dla serwera MySQL, aby zezwolić na połączenia klienckie. Po ustawieniu początkowego i końcowego adresu IP na 0.0.0.0 zapora będzie otwierana tylko dla innych zasobów platformy Azure.
+# Tworzę regułę zapory dla serwera MySQL, aby zezwolić na połączenia klienckie. 
+# Po ustawieniu początkowego i końcowego adresu IP na 0.0.0.0 zapora będzie otwierana tylko dla innych zasobów platformy Azure.
 az mysql server firewall-rule create \
 --name $AzureIPs \
 --server $mySQLname \
@@ -102,8 +104,13 @@ az mysql server firewall-rule create \
 --start-ip-address 0.0.0.0 \
 --end-ip-address 0.0.0.0
 
-#TEst
-az mysql server firewall-rule show -g $myResourceGroup -n $AzureIPs --server $mySQLname --query '[endIpAddress, startIpAddress]' -o table 
+#Test
+az mysql server firewall-rule show \
+-g $myResourceGroup \
+-n $AzureIPs \
+--server $mySQLname \
+--query '[endIpAddress, startIpAddress]' \
+-o table 
 
 Result
 --------
@@ -117,7 +124,11 @@ az mysql db create \
 --name $dbName
 
 #Zmienna
-echo "export wordpress_db_host=$(az mysql server show -n $mySQLname -g $myResourceGroup --query fullyQualifiedDomainName -o tsv)" >> ../.var
+echo "export wordpress_db_host=$(az mysql server show \
+-n $mySQLname \
+-g $myResourceGroup \
+--query fullyQualifiedDomainName \
+-o tsv)" >> ../.var
 
 # Konfigurowanie zmiennych bazy danych w rozwiązaniu WordPress
 az webapp config appsettings set \
