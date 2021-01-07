@@ -54,7 +54,7 @@ export location=germanywestcentral
 export planName=myAppServicePlan
 export appName=szkolachmuryzad5
 
-# Wdrażam smpla
+# Wdrażam sampla
 az webapp up \
 --resource-group $myResourceGroup \
 --plan $planName \
