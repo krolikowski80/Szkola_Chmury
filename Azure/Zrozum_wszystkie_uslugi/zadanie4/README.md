@@ -36,11 +36,11 @@ az group show --resource-group  $myResourceGroup --query 'name' -o json
 
 ## Fajne narzęzie np do tworzenia zmienych
 
-#App Service
+#App Service Plan
 az appservice plan create \
 --name  $planName \
 --resource-group  $myResourceGroup \
---sku S1 \ #Stndard
+--sku F1 \ #Stndard
 --is-linux #LinuxContainer
 ```
 

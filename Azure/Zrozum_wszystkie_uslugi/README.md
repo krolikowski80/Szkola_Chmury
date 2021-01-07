@@ -6,3 +6,5 @@
 * [Zadanie nr 3 - Networking](./zadanie3)
 
 * [Zadanie nr 4 - Storage and databases](./zadanie4)
+
+* [Zadanie nr 5 - App Service & GItHub](./zadanie5)
