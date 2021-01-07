@@ -83,7 +83,7 @@ az webapp up \
 </details>
 
 ```bash
-# A na jakim Pythoniw w ogóle pracuje?
+# A na jakim Pythonie w ogóle pracuje?
 az webapp config show \
 --resource-group $myResourceGroup \
 --name $appName \
