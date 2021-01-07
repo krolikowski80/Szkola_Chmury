@@ -109,9 +109,8 @@ az webapp config set \
 ### Prosta wersja CI/CD
 
 ```bash
-# Najpierw ręczna aktualizacja 
-# zmiana app.py i deploy
-# Poprawki do wersji Pythona. Inaczej znowu zmieni na 3.7
+# Najpierw ręczna aktualizacja, czyli klilu linii w zmiana app.py i deploy
+# Poprawka do wersji Pythona. Inaczej znowu zmieni na 3.7
 # Wersje Pytonga trzeba było sprawdzać i ustawiać przed pierwszym wdroźeniem.
 az webapp up --runtime "PYTHON|3.8"
 
@@ -149,8 +148,9 @@ az webapp up --runtime "PYTHON|3.8"
 #Zmienne
 echo "export subscr=$(az account subscription list --query [].subscriptionId -o tsv)" >> .var 
 
-# Poświadczenia wdrożenia - wystawione tyljo dla tej aplikacji.
-# W wielu tutorialach można spotkać wystawianie poświadczń dla całeg Resource Grupy alb innych szerszych miejsc. J a jednak wolę skąpo nadawać uprawnienie wg zasady "Tylko tyle ile trzeba"
+# Poświadczenia wdrożenia - wystawione tylko dla tej wskazanej aplikacji.
+# W wielu tutorialach można spotkać wystawianie poświadczń dla całeg Resource Grupy albo innych szerszych miejsc. 
+# Ja jednak wolę skąpo nadawać uprawnienia wg zasady "Tylko tyle ile trzeba"
 az ad sp create-for-rbac \
 --name $appName \
 --role contributor \
@@ -180,4 +180,4 @@ git push
 
 </details>
 
-> Zadanie można było wykonać w kilka kliknięć w portalu. Myślę że dev, który to robi zawsze na swoim środowisku, może śmiało konfigurować MS VS lub VSC i robić to właśnie klikająć w iokonki.
+> Zadanie można było wykonać w kilka kliknięć w portalu. Myślę że dev, który to robi zawsze na swoim środowisku, może śmiało konfigurować MS VS lub VSC i robić to właśnie klikająć w ikonki.
