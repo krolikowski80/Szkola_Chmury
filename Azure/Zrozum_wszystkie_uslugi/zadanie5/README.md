@@ -58,7 +58,7 @@ export appName=szkolachmuryzad5
 az webapp up \
 --resource-group $myResourceGroup \
 --plan $planName \
---sku F1 \
+--sku F1 \ # Ma być tanio a najlepiej za damo;>
 --name $appName \
 --location $location
 # Wynik 
