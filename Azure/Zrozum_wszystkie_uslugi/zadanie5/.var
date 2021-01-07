@@ -1,0 +1,7 @@
+export myResourceGroup=zadanie5tk
+export location=germanywestcentral
+
+export planName=myAppServicePlan
+export appName=szkolachmuryzad5
+
+export subscr=4c18ac9c-3885-4370-baf7-bf15e9c3f783
