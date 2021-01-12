@@ -8,3 +8,5 @@
 * [Zadanie nr 4 - Storage and databases](./zadanie4)
 
 * [Zadanie nr 5 - App Service & GItHub](./zadanie5)
+
+* [Zadanie nr 5.1 - dodatkowe - App Servis](./dodatek)

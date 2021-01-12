@@ -1,0 +1,1 @@
+> To nie było zadanie, tylko propozycja do głębszego zbadania AppServiss i sposobów deploymentu. 
