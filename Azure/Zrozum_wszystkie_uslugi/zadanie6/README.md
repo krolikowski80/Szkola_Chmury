@@ -1,4 +1,4 @@
-# Zadanie nr 6 - DEvTest Labs
+# Zadanie nr 6 - DevTest Labs
 
 ### Zadanie polega na stworzeniu DTL a w nim jednego obrazu VM. Dodaniu zewnętrznego urzytkownika do labsów i zezwoleniu mu na tworzenie VM tylko z tego obrazu. Dokonam też kilku, moim zdaniem, ważnych zmian w ustawieniach DTL.
 * Używam plików ARM z https://github.com/Azure/azure-quickstart-templates
