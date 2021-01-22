@@ -158,4 +158,5 @@ az group delete \
 --name $myResourceGroup
 ```
 > Nie jestem do końca zadowolony z tego wykonania. To pokazuje jak jeszcze wiele nauki przede mną.
+Nie dostrczyłem userowi klucza SSH. A przecież nie wyślę mu go mailem ;>
 
