@@ -1,0 +1,23 @@
+[
+  {
+    "artifactId": "/artifactSources/public repo/artifacts/linux-install-docker",
+    "parameters": []
+  },
+  {
+    "artifactId": "/artifactSources/public repo/artifacts/linux-apt-package",
+    "parameters": [
+      {
+        "name": "packages",
+        "value": "git"
+      },
+      {
+        "name": "update",
+        "value": "true"
+      },
+      {
+        "name": "options",
+        "value": ""
+      }
+    ]
+  }
+]
