@@ -9,4 +9,6 @@
 
 * [Zadanie nr 5 - App Service & GItHub](./zadanie5)
 
-* [Zadanie nr 5.1 - dodatkowe - App Servis](./dodatek)
+* [Zadanie nr dodatkowe - dodatkowe - App Services and pipline](./dodatek)
+
+* [Zadanie nr 6 - Dev Test Lab](./zadanie6)

@@ -1,0 +1,8 @@
+export myResourceGroup=zad6_DTL_rg
+export location=westeurope
+export labName=zad6_DevTestLab
+export deploymentName='Zad6Deployment'$(date +"%d-%b-%Y")
+export vmName=VM001
+
+export vmAdress=zad6devtestlab4154539758000.westeurope.cloudapp.azure.com
+export vmPort=56024
