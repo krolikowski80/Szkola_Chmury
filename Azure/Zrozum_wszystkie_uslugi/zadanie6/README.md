@@ -156,6 +156,6 @@ az lab vm show \
 # delete grupy
 az group delete \
 --name $myResourceGroup
-
-
+```
+> Nie jestem do końca zadowolony z tego wykonania. To pokazuje jak jeszcze wiele nauki przede mną.
 
