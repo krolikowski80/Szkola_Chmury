@@ -64,7 +64,7 @@ az lab vm show \
 --name $vmName \
 --query '{status: computeVm.statuses[0].displayStatus, fqdn: fqdn}'
 
-# Nie wiem czemu nie zwraca FQDN, nie wiem też jak pobrć port. Więc sprawdziłem w portalu
+# Nie wiem czemu nie zwraca FQDN, nie wiem też jak pobrć port. Więc sprawdziłem w portalu.
 {
   "fqdn": null,
   "status": null
