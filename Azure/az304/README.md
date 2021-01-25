@@ -1,3 +1,3 @@
-# [AZ-304: Microsoft Azure Architect Design](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/)
-## [Spotkanie 1 - Design Landing Zone Basics](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/design-landing-zone-basics/)
+## [AZ-304: Microsoft Azure Architect Design](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/)
+### [Spotkanie 1 - Design Landing Zone Basics](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/design-landing-zone-basics/)
 * [Zadanie 1](./zadanie1)
