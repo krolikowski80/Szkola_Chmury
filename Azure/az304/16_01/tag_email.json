@@ -1,0 +1,28 @@
+{
+    "mode": "Indexed",
+    "parameters": {
+        "tagName": {
+            "type": "String",
+            "metadata": {
+                "displayName": "User role",
+                "description": "Name of the tag, such as 'Owner, tester, developer'"
+            }
+        },
+        "tagValue": {
+            "type": "String",
+            "metadata": {
+                "displayName": "valid email address",
+                "description": "Value of the tag, such as 'valid email address'"
+            }
+        }
+    },
+    "policyRule": {
+        "if": {
+            "field": "[concat('tags[', parameters('tagName'), ']')]",
+            "notLike": "[concat('*@', parameters('tagValue'))]"
+        },
+        "then": {
+            "effect": "deny"
+        }
+    }
+}

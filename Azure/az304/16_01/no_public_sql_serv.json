@@ -1,0 +1,35 @@
+{
+    "mode": "Indexed",
+    "parameters": {
+        "effect": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Effect",
+                "description": "Enable or disable the execution of the policy"
+            },
+            "allowedValues": [
+                "Audit",
+                "Deny",
+                "Disabled"
+            ],
+            "defaultValue": "Audit"
+        }
+    },
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Sql/servers"
+                },
+                {
+                    "field": "Microsoft.Sql/servers/publicNetworkAccess",
+                    "notEquals": "Disabled"
+                }
+            ]
+        },
+        "then": {
+            "effect": "[parameters('effect')]"
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "mode": "Indexed",
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "type",
+                    "equals": "Microsoft.Storage/storageAccounts"
+                },
+                {
+                    "field": "Microsoft.Storage/storageAccounts/allowBlobPublicAccess",
+                    "equals": "true"
+                }
+            ]
+        },
+        "then": {
+            "effect": "[parameters('effect')]"
+        }
+    },
+    "parameters": {
+        "effect": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Effect",
+                "description": "Enable or disable the execution of the policy"
+            },
+            "allowedValues": [
+                "Audit",
+                "Deny",
+                "Disabled"
+            ],
+            "defaultValue": "Deny"
+        }
+    }
+}

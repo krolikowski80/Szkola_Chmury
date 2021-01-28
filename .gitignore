@@ -10,3 +10,7 @@ standard/
 .varz
 multicontainerwordpress-master/
 .pyc
+logowanie.txt
+przykład/
+*.docx
+*.pdf
