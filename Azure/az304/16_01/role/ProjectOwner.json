@@ -1,0 +1,23 @@
+{
+    "Name": "projectOwner",
+    "IsCustom": true,
+    "description": " - może zarządzać usługami Virtual Machines, Azure Kubernetes Services, Storage Account. - nie może modfikować usług sieciowych (Microsoft.Network) - nie może modyfikować usługi Azure Log Analytics",
+    "Actions": [
+        "Microsoft.Compute/virtualMachines/*",
+        "Microsoft.KubernetesConfiguration/*",
+        "microsoft.web/kubeEnvironments/*",
+        "Microsoft.Kubernetes/*",
+        "Microsoft.Storage/storageAccounts/*"
+    ],
+    "NotActions": [
+        "Microsoft.Network/*/write",
+        "Microsoft.Network/*/delete",
+        "Microsoft.Compute/locations/logAnalytics/getRequestRateByInterval/action",
+        "Microsoft.Compute/locations/logAnalytics/getThrottledRequests/action"
+    ],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+        "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/zad1_az304"
+    ]
+}

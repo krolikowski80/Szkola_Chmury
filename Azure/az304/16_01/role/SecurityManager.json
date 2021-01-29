@@ -1,0 +1,18 @@
+{
+    "Name": "projectOwner",
+    "IsCustom": true,
+    "description": " - może modyfikować: Azure Security Center, Azure Log Analytics. - nie może tworzyć: Azure Security Center, Azure Log Analytics. - może tworzyć alerty",
+    "Actions": [
+        "Microsoft.Resources/deployments/*",
+        "Microsoft.OperationalInsights/*",
+        "Microsoft.OperationsManagement/*",
+        "Microsoft.Automation/*",
+        " Microsoft.Resources/deployments/*/write "
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+        "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/zad1_az304"
+    ]
+}

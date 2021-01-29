@@ -185,16 +185,78 @@ az sql server create \
 
 ## 2 Spróbuj stworzyć 3 nowe role i sprawdź ich działanie tworząc 3 urzytkowników dla potrzeb testów:
 > Uwaga: rola domyślnie nie może nic ponad to, co opisano niżej. A więc rola SecurityEng może tylko tworzyć zapytania i nic ponad to.
+* [Resource Provider Operations](https://docs.microsoft.com/pl-pl/azure/role-based-access-control/resource-provider-operations)
+```bash
+# Lista subskrybcji
+az account list --output table
 
-* **Rola: ProjectOwner**
-    * może zarządzać usługami Virtual Machines, Azure Kubernetes Services, Storage Account
-    * nie może modfikować usług sieciowych (Microsoft.Network)
-    * nie może modyfikować usługi Azure Log Analytics
+Name           CloudName    SubscriptionId                        State    IsDefault
+-------------  -----------  ------------------------------------  -------  -----------
+Szkola Chmury  AzureCloud   4c18ac9c-3885-4370-baf7-bf15e9c3f783  Enabled  True
+
+# Lista resource group
+az group list -o table
+
+Name        Location     Status
+----------  -----------  ---------
+zad1_az304  northeurope  Succeeded
+```
+
+<details>
+  <summary><b><i> - 2.1 Rola: ProjectOwner <br>
+    - może zarządzać usługami Virtual Machines, Azure Kubernetes Services, Storage Account<br>
+    - nie może modfikować usług sieciowych (Microsoft.Network)<br>
+    - nie może modyfikować usługi Azure Log Analytics </b></i></summary>
+
+```json
+{
+    "Name": "projectOwner",
+    "IsCustom": true,
+    "description": " - może zarządzać usługami Virtual Machines, Azure Kubernetes Services, Storage Account. - nie może modfikować usług sieciowych (Microsoft.Network) - nie może modyfikować usługi Azure Log Analytics",
+    "Actions": [
+        "*/read"
+        "Microsoft.Compute/virtualMachines/*",
+        "Microsoft.KubernetesConfiguration/*",
+        "microsoft.web/kubeEnvironments/*",
+        "Microsoft.Kubernetes/*",
+        "Microsoft.Storage/storageAccounts/*"
+    ],
+    "NotActions": [
+        "Microsoft.Network/*/write",
+        "Microsoft.Network/*/delete",
+        "Microsoft.Compute/locations/logAnalytics/getRequestRateByInterval/action",
+        "Microsoft.Compute/locations/logAnalytics/getThrottledRequests/action"
+    ],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+        "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/zad1_az304"
+    ]
+}
+```
+```bash
+# Tworzę rolę
+az role definition create --role-definition "~/local_repo/Szkola_Chmury/Azure/az304/16_01/role/ProjectOwner.json"
+
+# Lista ról niestandardowych
+az role definition list --custom-role-only true
+
+```
+</details>
+
 ---
-* **Rola: SecurityManager:**
-    * może modyfikować: Azure Security Center, Azure Log Analytics
-    * nie może tworzyć: Azure Security Center, Azure Log Analytics
-    * może tworzyć alerty
-    ---
-* **Rola: SecurityEng**
-    * może: tworzyć zapytania w ramach Azure Log Analytics
+
+* Pomoc jest [tuaj](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/manage-access) oraz  [tutaj](https://docs.microsoft.com/pl-pl/azure/azure-monitor/platform/roles-permissions-security)
+<details>
+  <summary><b><i> - 2.2 Rola: SecurityManager  <br>
+    - może modyfikować: Azure Security Center, Azure Log Analytics <br>
+    - nie może tworzyć: Azure Security Center, Azure Log Analytics <br>
+    - może tworzyć alerty  </b></i></summary>
+
+</details>
+
+---
+<details>
+  <summary><b><i> - 2.3 Rola: SecurityEng  <br>
+    - może: tworzyć zapytania w ramach Azure Log Analytics <b></i></summary>
+</details>
