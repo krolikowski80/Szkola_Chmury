@@ -127,8 +127,10 @@ Codename:       bionic
 # Działa
 ```
 ### Maszyna VM02
+
+#### Edytuję szablon pobrany ze wskazanego githuba
+#### [Szablony](./apache_template)
 ```bash 
-# Edytuję szablon pobrany ze wskazanego githuba
 # I wdrażam
 az deployment group create \
 --resource-group $myResourceGroup \
