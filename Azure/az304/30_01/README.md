@@ -267,3 +267,4 @@ az network route-table route create \
 ```
 
 I tutaj stanąłem w miejscu. Jak zrobić routing? ;>
+Alr itak robienie tego w ten sposób jest czasochłonne. Trzeba to zrobić w Azure Resource Manager.
