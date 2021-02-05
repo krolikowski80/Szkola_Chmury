@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "newStorageAccountName": {
+            "value": "vm02storagekrolik"
+        },
+        "adminUsername": {
+            "value": "krolik"
+        },
+        "dnsNameForPublicIP": {
+            "value": "vm02-ip"
+        },
+        "adminPasswordOrKey": {
+            "value": "!Tajne@haslo12345"
+        }
+    }
+}

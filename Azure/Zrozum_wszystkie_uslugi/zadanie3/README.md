@@ -118,7 +118,7 @@ array=($nic1 $nic2 $nic3)
 for vmnic in "${array[@]}"
 do
   az network nic create \
-  --resource-group $myResourceGroup1\
+  --resource-group $myResourceGroup1 \
   --name $vmnic \
   --vnet-name $VNetName \
   --subnet $subnetName \

@@ -1,0 +1,27 @@
+export myResourceGroup=rg-hub-and-spot
+export location=westeurope
+
+export VNetName=vnet01
+export VNetPref=10.1.0.0/24
+
+export subnetName=default
+export subnetPref=10.1.0.0/24
+
+export VM01publicIP=vm01-ip
+
+export nsg=vm01-nsg
+export nsgRule=vm01-nsg-rule
+
+export vm01nic=vm01nic
+
+export vmName=vm01
+export user=krolik
+export passwd=!Tajne@haslo12345
+
+export FirewallName=myfirewall
+export VNetFw=vnet-hub
+export fwpip=fw-public-ip
+export ipcName=fw-config
+
+export vnet01tohubroute=vnet01-to-hub-route
+export vnet02tohubroute=vnet02-to-hub-route
