@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "extensions_newuserscript_storageAccountName": {
+            "value": null
+        },
+        "extensions_newuserscript_storageAccountKey": {
+            "value": null
+        },
+        "extensions_newuserscript_commandToExecute": {
+            "value": null
+        },
+        "virtualMachines_vm02_name": {
+            "value": null
+        },
+        "disks_vm02_OSDisk_externalid": {
+            "value": null
+        },
+        "networkInterfaces_vm02nic_externalid": {
+            "value": null
+        }
+    }
+}

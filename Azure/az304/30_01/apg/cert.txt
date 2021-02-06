@@ -1,0 +1,8 @@
+New-SelfSignedCertificate -certstorelocation cert:\localmachine\my -dnsname www.contoso.com
+
+$pwd = ConvertTo-SecureString -String TajneHaslo12345 -Force -AsPlainText
+
+Export-PfxCertificate -cert cert:\localMachine\my\<your thumbprint> -FilePath c:\mySelfSignedCert.pfx -Password $pwd
+
+
+

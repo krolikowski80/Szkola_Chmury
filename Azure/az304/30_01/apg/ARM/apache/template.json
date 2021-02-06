@@ -1,0 +1,104 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "extensions_newuserscript_storageAccountName": {
+            "type": "SecureString"
+        },
+        "extensions_newuserscript_storageAccountKey": {
+            "type": "SecureString"
+        },
+        "extensions_newuserscript_commandToExecute": {
+            "type": "SecureString"
+        },
+        "virtualMachines_vm02_name": {
+            "defaultValue": "vm02",
+            "type": "String"
+        },
+        "disks_vm02_OSDisk_externalid": {
+            "defaultValue": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Compute/disks/vm02_OSDisk",
+            "type": "String"
+        },
+        "networkInterfaces_vm02nic_externalid": {
+            "defaultValue": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/networkInterfaces/vm02nic",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-07-01",
+            "name": "[parameters('virtualMachines_vm02_name')]",
+            "location": "westeurope",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_A0"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "Canonical",
+                        "offer": "UbuntuServer",
+                        "sku": "18.04-LTS",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('virtualMachines_vm02_name'), '_OSDisk')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Standard_LRS",
+                            "id": "[parameters('disks_vm02_OSDisk_externalid')]"
+                        },
+                        "diskSizeGB": 30
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_vm02_name')]",
+                    "adminUsername": "krolik",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false,
+                        "provisionVMAgent": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_vm02nic_externalid')]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2019-07-01",
+            "name": "[concat(parameters('virtualMachines_vm02_name'), '/newuserscript')]",
+            "location": "westeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachines_vm02_name'))]"
+            ],
+            "properties": {
+                "autoUpgradeMinorVersion": true,
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "settings": {
+                    "fileUris": [
+                        "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/apache2-on-ubuntu-vm/install_apache.sh"
+                    ]
+                },
+                "protectedSettings": {
+                    "storageAccountName": "[parameters('extensions_newuserscript_storageAccountName')]",
+                    "storageAccountKey": "[parameters('extensions_newuserscript_storageAccountKey')]",
+                    "commandToExecute": "[parameters('extensions_newuserscript_commandToExecute')]"
+                }
+            }
+        }
+    ]
+}
