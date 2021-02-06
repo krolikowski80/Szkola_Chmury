@@ -1,4 +1,4 @@
-## # pliki ARM, na  których twykonuję LAB 3
+## # pliki ARM, na  których wykonuję LAB 3
 
 * [VM Apache](./ARM/apache)
 
