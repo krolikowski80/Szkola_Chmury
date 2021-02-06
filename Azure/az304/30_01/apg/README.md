@@ -1,4 +1,4 @@
-## # pliki ARM, które tworzą zadane środowisko.
+## # pliki ARM, na  których twykonuję LAB 3
 
 * [VM Apache](./ARM/apache)
 
