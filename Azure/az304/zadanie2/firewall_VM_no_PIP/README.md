@@ -30,7 +30,8 @@ az deployment group create \
 
 > [parameters](~/local_repo/Szkola_Chmury/Azure/az304/zadanie2/firewall_VM_no_PIP/WIN10/parameters.json)
 
-# Po minutach kilku, mym oczom ukazała się VM - tylko z lokalnym IP = 10.1.0.4
+> Po minutach kilku, mym oczom ukazała się VM - tylko z lokalnym IP = 10.0.2.4
+```bash
 az vm list-ip-addresses -n win10-vm01 -o table
 
     VirtualMachine    PrivateIPAddresses
