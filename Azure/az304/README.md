@@ -7,3 +7,4 @@
 ### [Spotkanie 2](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/design-infrastructure/)
 * [Laboratorium NetworkingHub & Spoke](./30_01/nhs)
 * [Labolatorium Application Gateway](./30_01/apg)
+* [Labolatorium Azure Firewall do ustawienia połączeń RDP](./zadanie2/firewall_VM_no_PIP/)
