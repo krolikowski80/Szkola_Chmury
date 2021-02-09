@@ -1,0 +1,275 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "storageAccountName": {
+            "type": "string"
+        },
+        "accountType": {
+            "type": "string"
+        },
+        "kind": {
+            "type": "string"
+        },
+        "accessTier": {
+            "type": "string"
+        },
+        "minimumTlsVersion": {
+            "type": "string"
+        },
+        "supportsHttpsTrafficOnly": {
+            "type": "bool"
+        },
+        "allowBlobPublicAccess": {
+            "type": "bool"
+        },
+        "allowSharedKeyAccess": {
+            "type": "bool"
+        },
+        "networkAclsBypass": {
+            "type": "string"
+        },
+        "networkAclsDefaultAction": {
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "type": "Microsoft.Resources/deployments",
+            "name": "vnet-zjazd-drugi_332716da-1249-4b86-9778-1869dde53040",
+            "subscriptionId": "4c18ac9c-3885-4370-baf7-bf15e9c3f783",
+            "resourceGroup": "rg-zjazd-drugi",
+            "dependsOn": [],
+            "resources": [],
+            "properties": {
+                "mode": "Incremental",
+                "parameters": {},
+                "template": {
+                    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "apiVersion": "2019-09-01",
+                            "name": "vnet-zjazd-drugi",
+                            "type": "Microsoft.Network/virtualNetworks",
+                            "location": "westeurope",
+                            "properties": {
+                                "provisioningState": "Succeeded",
+                                "resourceGuid": "57ae3ee1-470a-45c8-b82b-d8a958ff9bfc",
+                                "addressSpace": {
+                                    "addressPrefixes": [
+                                        "10.1.0.0/16"
+                                    ]
+                                },
+                                "subnets": [
+                                    {
+                                        "name": "default",
+                                        "id": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/virtualNetworks/vnet-zjazd-drugi/subnets/default",
+                                        "etag": "W/\"641df203-b270-4552-ab63-9f036f9c5da4\"",
+                                        "properties": {
+                                            "provisioningState": "Succeeded",
+                                            "addressPrefix": "10.1.0.0/24",
+                                            "ipConfigurations": [
+                                                {
+                                                    "id": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/networkInterfaces/win10-vm01-nic/ipConfigurations/ipconfig1"
+                                                }
+                                            ],
+                                            "delegations": [],
+                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateLinkServiceNetworkPolicies": "Enabled"
+                                        },
+                                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                                    },
+                                    {
+                                        "name": "AzureBastionSubnet",
+                                        "id": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/virtualNetworks/vnet-zjazd-drugi/subnets/AzureBastionSubnet",
+                                        "etag": "W/\"641df203-b270-4552-ab63-9f036f9c5da4\"",
+                                        "properties": {
+                                            "provisioningState": "Succeeded",
+                                            "addressPrefix": "10.1.1.0/24",
+                                            "ipConfigurations": [
+                                                {
+                                                    "id": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/bastionHosts/bastion-zdrugi-jazd/bastionHostIpConfigurations/IpConf"
+                                                }
+                                            ],
+                                            "delegations": [],
+                                            "privateEndpointNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "Enabled"
+                                        },
+                                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                                    }
+                                ],
+                                "virtualNetworkPeerings": [],
+                                "enableDdosProtection": false,
+                                "enableVmProtection": false
+                            },
+                            "tags": {}
+                        }
+                    ],
+                    "outputs": {}
+                }
+            }
+        },
+        {
+            "name": "[parameters('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "accessTier": "[parameters('accessTier')]",
+                "minimumTlsVersion": "[parameters('minimumTlsVersion')]",
+                "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
+                "allowBlobPublicAccess": "[parameters('allowBlobPublicAccess')]",
+                "allowSharedKeyAccess": "[parameters('allowSharedKeyAccess')]",
+                "networkAcls": {
+                    "bypass": "[parameters('networkAclsBypass')]",
+                    "defaultAction": "[parameters('networkAclsDefaultAction')]",
+                    "ipRules": []
+                }
+            },
+            "dependsOn": [
+                "Microsoft.Resources/deployments/vnet-zjazd-drugi_332716da-1249-4b86-9778-1869dde53040"
+            ],
+            "sku": {
+                "name": "[parameters('accountType')]"
+            },
+            "kind": "[parameters('kind')]",
+            "tags": {}
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "type": "Microsoft.Resources/deployments",
+            "name": "privateEndpointZjazd_332716da-1249-4b86-9778-1869dde53041",
+            "subscriptionId": "4c18ac9c-3885-4370-baf7-bf15e9c3f783",
+            "resourceGroup": "rg-zjazd-drugi",
+            "dependsOn": [
+                "microsoft.storage/storageaccounts/sazjazddrugi"
+            ],
+            "resources": [],
+            "properties": {
+                "mode": "Incremental",
+                "parameters": {
+                    "privateEndpointName": {
+                        "value": "privateEndpointZjazdDrugi"
+                    },
+                    "privateEndpointConnectionId": {
+                        "value": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/privateEndpoints/privateLinkServiceConnections/privateEndpointZjazdDrugi_11b20bed-80da-497d-a5fe-b38a2fb5e016"
+                    },
+                    "privateEndpointConnectionName": {
+                        "value": "privateEndpointZjazdDrugi_11b20bed-80da-497d-a5fe-b38a2fb5e016"
+                    },
+                    "privateEndpointId": {
+                        "value": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/privateEndpoints/privateEndpointZjazdDrugi"
+                    },
+                    "privateEndpointApiVersion": {
+                        "value": "2020-03-01"
+                    },
+                    "privateLinkServiceId": {
+                        "value": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourcegroups/rg-zjazd-drugi/providers/Microsoft.Storage/storageAccounts/sazjazddrugi"
+                    },
+                    "groupId": {
+                        "value": "blob"
+                    },
+                    "subnetId": {
+                        "value": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/virtualNetworks/vnet-zjazd-drugi/subnets/default"
+                    },
+                    "location": {
+                        "value": "westeurope"
+                    },
+                    "tags": {
+                        "value": {}
+                    }
+                },
+                "templatelink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "https://storage.hosting.portal.azure.net/storage/Content/4.13.393.109/DeploymentTemplates/PrivateEndpointForStorage.json"
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "PrivateDns-332716da12494b8697781869dde53042",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[string('rg-zjazd-drugi')]",
+            "dependsOn": [
+                "[string('privateEndpointZjazd_332716da-1249-4b86-9778-1869dde53041')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "Microsoft.Network/privateDnsZones",
+                            "apiVersion": "2018-09-01",
+                            "name": "[string('privatelink.blob.core.windows.net')]",
+                            "location": "global",
+                            "tags": {},
+                            "properties": {}
+                        },
+                        {
+                            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+                            "apiVersion": "2018-09-01",
+                            "name": "[concat(string('privatelink.blob.core.windows.net'), '/', uniqueString(string('/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/virtualNetworks/vnet-zjazd-drugi')))]",
+                            "location": "global",
+                            "dependsOn": [
+                                "[string('privatelink.blob.core.windows.net')]"
+                            ],
+                            "properties": {
+                                "virtualNetwork": {
+                                    "id": "[string('/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/virtualNetworks/vnet-zjazd-drugi')]"
+                                },
+                                "registrationEnabled": false
+                            }
+                        },
+                        {
+                            "apiVersion": "2017-05-10",
+                            "name": "EndpointDnsRecords-332716da12494b8697781869dde53042",
+                            "type": "Microsoft.Resources/deployments",
+                            "dependsOn": [
+                                "[string('privatelink.blob.core.windows.net')]"
+                            ],
+                            "properties": {
+                                "mode": "Incremental",
+                                "templatelink": {
+                                    "contentVersion": "1.0.0.0",
+                                    "uri": "https://storage.hosting.portal.azure.net/storage/Content/4.13.393.109/DeploymentTemplates/PrivateDnsForPrivateEndpoint.json"
+                                },
+                                "parameters": {
+                                    "privateDnsName": {
+                                        "value": "[string('privatelink.blob.core.windows.net')]"
+                                    },
+                                    "privateEndpointNicResourceId": {
+                                        "value": "[reference('privateEndpointZjazd_332716da-1249-4b86-9778-1869dde53041').outputs.networkInterfaceId.value]"
+                                    },
+                                    "nicRecordsTemplateUri": {
+                                        "value": "https://storage.hosting.portal.azure.net/storage/Content/4.13.393.109/DeploymentTemplates/PrivateDnsForPrivateEndpointNic.json"
+                                    },
+                                    "ipConfigRecordsTemplateUri": {
+                                        "value": "https://storage.hosting.portal.azure.net/storage/Content/4.13.393.109/DeploymentTemplates/PrivateDnsForPrivateEndpointIpConfig.json"
+                                    },
+                                    "uniqueId": {
+                                        "value": "332716da12494b8697781869dde53042"
+                                    },
+                                    "existingRecords": {
+                                        "value": {}
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "subscriptionId": "[string('4c18ac9c-3885-4370-baf7-bf15e9c3f783')]"
+        }
+    ],
+    "outputs": {}
+}

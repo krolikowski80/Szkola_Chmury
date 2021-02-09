@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "networkInterfaceName": {
+            "value": "win10-vm01-nic"
+        },
+        "networkSecurityGroupName": {
+            "value": "win10-vm01-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": []
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/4c18ac9c-3885-4370-baf7-bf15e9c3f783/resourceGroups/rg-zjazd-drugi/providers/Microsoft.Network/virtualNetworks/vnet-zjazd-drugi"
+        },
+        "virtualMachineName": {
+            "value": "win10-vm01"
+        },
+        "virtualMachineComputerName": {
+            "value": "win10-vm01"
+        },
+        "virtualMachineRG": {
+            "value": "rg-zjazd-drugi"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D2_v2"
+        },
+        "adminUsername": {
+            "value": "krolik"
+        },
+        "adminPassword": {
+            "value": "!Kingalena1102"
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        }
+    }
+}

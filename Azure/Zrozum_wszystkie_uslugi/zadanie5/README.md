@@ -180,4 +180,4 @@ git push
 
 </details>
 
-> Zadanie można było wykonać w kilka kliknięć w portalu. Myślę że dev, który to robi zawsze na swoim środowisku, może śmiało konfigurować MS VS lub VSC i robić to właśnie klikająć w ikonki.
+> Zadanie można było wykonać w kilka kliknięć w portalu. Myślę, że dev który to robi zawsze na swoim środowisku, może śmiało konfigurować MS VS lub VSC i robić to właśnie klikająć w ikonki.
