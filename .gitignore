@@ -1,7 +1,5 @@
 *.code-workspace
 #*.json
-*.yml
-*.yaml
 materials/
 .gcloudignore
 .python-version
@@ -14,3 +12,4 @@ logowanie.txt
 przykład/
 *.docx
 *.pdf
+node_modules

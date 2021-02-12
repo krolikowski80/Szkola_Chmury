@@ -1,11 +1,15 @@
 ## [AZ-304: Microsoft Azure Architect Design](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/)
 ### [Spotkanie 1 - Design Landing Zone Basics](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/design-landing-zone-basics/)
 * [Zadanie 1 - Role i polityki](./zadanie1)
-* [polityki](./16_01/policy)
-* [role](.16_01/role)
+* [pliki - polityki](./16_01/policy)
+* [pliki - role](.16_01/role)
 
-### [Spotkanie 2](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/design-infrastructure/)
+### [Spotkanie 2 - Design Infrastructure](https://szkolachmury.pl/az-304-microsoft-azure-architect-design/design-infrastructure/)
 * [Laboratorium NetworkingHub & Spoke](./30_01/nhs)
 * [Labolatorium Application Gateway](./30_01/apg)
 * [Labolatorium Azure Firewall do ustawienia połączeń RDP](./zadanie2/firewall_VM_no_PIP/)
 * [Labolatorium Azure and private endpoint](./zadanie2/StorageAccount)
+
+### [Spotkanie nr 3]()
+* [Notatki](.13_02/notatki)
+* [Labolatorium Implementing Containers in Azure](./13_02/lab/Lab.1-ImplementingContainersInAzure/)

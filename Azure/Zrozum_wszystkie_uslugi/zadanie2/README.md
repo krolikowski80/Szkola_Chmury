@@ -20,9 +20,7 @@ export userName=szkolachmurykrolikowski
 
 
 #Tworzę swoje prywatne repo na ACR
-az acr create --resource-group $myResourceGroup \
---name $containerRegistryName \
---sku Basic
+
 
 #Włączam konto administratora rejestru
 az acr update -n $containerRegistryName \
@@ -130,8 +128,6 @@ az container delete \
 --name $containerName
 ```
 > Jak widać 2 metoda jest szybsza i przyjemniejsza.
-
-
 
 
 ## 2.3 Kubernetes
