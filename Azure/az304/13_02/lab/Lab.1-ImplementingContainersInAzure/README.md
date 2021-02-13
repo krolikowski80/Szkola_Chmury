@@ -67,11 +67,6 @@ export myResourceGroup=zjazd3-szkchm-rg
 export locate=westeurope
 export containerRegistryName=AZ304registry34krolik
 
-# Tworzę grupę zasobów
-az group create \
-> -n $myResourceGroup \
-> -l $locate 
-
 # Tworzę swoje prywatne repo na ACR
 # Parameter 'registry_name' must conform to the following pattern: '^[a-zA-Z0-9]*$'.
 az acr create --resource-group $myResourceGroup \
