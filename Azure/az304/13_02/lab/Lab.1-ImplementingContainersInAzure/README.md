@@ -63,7 +63,7 @@ ENTRYPOINT [ "npm","start" ]
 
 ```bash
 #Zmienne
-export myResourceGroup=zjazd3-szkchm-rg
+export myResourceGroup=RG-AZ304-34
 export locate=westeurope
 export containerRegistryName=AZ304registry34krolik
 
