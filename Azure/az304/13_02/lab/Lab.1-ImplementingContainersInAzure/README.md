@@ -65,7 +65,7 @@ ENTRYPOINT [ "npm","start" ]
 #Zmienne AZ
 export myResourceGroup=zjazd3-szkchm-rg
 export locate=westeurope
-export containerRegistryName=AZ304registry34
+export containerRegistryName=AZ304registry34krolik
 
 # Tworzę grupę zasobów
 az group create \
@@ -87,14 +87,15 @@ az acr credential show \
 --name $containerRegistryName \
 -o table
 
-  USERNAME         PASSWORD                          PASSWORD2
-  ---------------  --------------------------------  --------------------------------
-  AZ304registry34  l55Q9MjBPnEnd6+eZ/1dou0JOlPwPqfR  gLrbk=Qsk270l3Lui6iI8X3ud4yJZ+no
+  USERNAME                PASSWORD                          PASSWORD2
+  ---------------         --------------------------------  --------------------------------
+  AZ304registry34krolik   l55Q9MjBPnEnd6+eZ/1dou0JOlPwPqfR  gLrbk=Qsk270l3Lui6iI8X3ud4yJZ+no
 
 # Zmienne
-export userName=AZ304registry34
+export userName=AZ304registry34krolik
 export registryPassword=l55Q9MjBPnEnd6+eZ/1dou0JOlPwPqfR
-export loginServer=az304registry34.azurecr.io
+export loginServer=az304registry34krolik.azurecr.io
+export clusterName=AZ304Cluster34
 
 # Build image
 docker build –t containerapp .
@@ -124,15 +125,15 @@ az login
 # Tworzę klaster
 az aks create \
 --resource-group $myResourceGroup \
---name AZ304Cluster34 \
+--name $clusterName \
 --node-vm-size Standard_A5 \
 --node-count 1 \
 --generate-ssh-keys
 
 # Pobieram uprawnienia
 az aks get-credentials \
---resource-group RG-AZ304-34 \
---name AZ304Cluster34
+--resource-group $myResourceGroup \
+--name 
 
 # Create secret for ACR
 k create secret docker-registry azuresecret \
@@ -207,7 +208,7 @@ spec:
     spec:
       containers:
         - name: containerapp
-          image: az304registrykrolik.azurecr.io/containerapp
+          image: az304registry34krolik.azurecr.io/containerapp
           ports:
             - containerPort: 3000
       imagePullSecrets:
