@@ -10,6 +10,7 @@
 * [Labolatorium Azure Firewall do ustawienia połączeń RDP](./zadanie2/firewall_VM_no_PIP/)
 * [Labolatorium Azure and private endpoint](./zadanie2/StorageAccount)
 
-### [Spotkanie nr 3]()
-* [Notatki](.13_02/notatki)
+### [Spotkanie 3 - Design Infrastructure - Part 2]()
+* [Notatki](./13_02/notatki)
 * [Labolatorium Implementing Containers in Azure](./13_02/lab/Lab.1-ImplementingContainersInAzure/)
+* [Labolatorium Azure DevOps](./13_02/lab/Lab.2-Azure_DevOps/)
