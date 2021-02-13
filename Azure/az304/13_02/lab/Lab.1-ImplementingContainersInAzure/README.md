@@ -176,7 +176,7 @@ spec:
 
 ```bash
 # Deploy
-k create -f deployment.yam
+k create -f deployment.yaml
 
 # Verify status
 kubectl get pods
