@@ -6,3 +6,18 @@ create a Build Pipeline which will run every time code is pushed to master branc
 deployment will be handled by DevOps service – app will be published to Azure App Service
 every time build succeeded.
 
+```bash
+# zmienne
+export myResourceGroup=zjzd3-lab2-rg
+export location=westeurope
+
+# resource group
+az group create \
+-n $myResourceGroup \
+-l $location
+
+# deploy web app
+az deployment group create \
+--resource-group $myResourceGroup \
+--template-file template.json \
+--parameters parameters.json

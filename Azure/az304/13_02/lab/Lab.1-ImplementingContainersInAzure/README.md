@@ -123,11 +123,10 @@ az login
 
 # Tworzę klaster
 az aks create \
---resource-group RG-AZ304-34 \
+--resource-group $myResourceGroup \
 --name AZ304Cluster34 \
 --node-vm-size Standard_A5 \
 --node-count 1 \
---enable-addons monitoring \
 --generate-ssh-keys
 
 # Pobieram uprawnienia
@@ -166,7 +165,7 @@ spec:
     spec:
       containers:
         - name: containerapp
-          image: az304registrykrolik.azurecr.io/containerapp
+          image: az304registry34krolik.azurecr.io/containerapp
           ports:
             - containerPort: 3000
       imagePullSecrets:
@@ -235,7 +234,7 @@ k apply -f deployment.yaml
 k get services
     
     NAME                  TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)          AGE
-    containerappservice   LoadBalancer   10.0.176.167   20.76.60.211   3000:30315/TCP   29s 
+    containerappservice   LoadBalancer   10.0.176.167   20.76.27.56   3000:30315/TCP   29s 
     kubernetes            ClusterIP      10.0.0.1       <none>         443/TCP          119m
 ```
 <details>

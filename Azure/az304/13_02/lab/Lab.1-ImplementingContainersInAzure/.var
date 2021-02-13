@@ -1,7 +1,7 @@
-export myResourceGroup=zjazd3-szkchm-rg
+export myResourceGroup=RG-AZ304-34
 export locate=westeurope
 
-export containerRegistryName=AZ304registry34
-export userName=AZ304registry34
-export registryPassword=l55Q9MjBPnEnd6+eZ/1dou0JOlPwPqfR
-export loginServer=az304registry34.azurecr.io
+export containerRegistryName=AZ304registry34krolik
+export userName=AZ304registry34krolik
+export registryPassword=vgs0qNMkrfzN5IsBwAcpEh2+voU24JCK
+export loginServer=AZ304registry34krolik.azurecr.io
