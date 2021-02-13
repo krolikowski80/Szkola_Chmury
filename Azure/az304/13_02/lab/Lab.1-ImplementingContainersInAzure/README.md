@@ -175,7 +175,7 @@ spec:
 k create -f deployment.yaml
 
 # Verify status
-kubectl get pods
+k get pods
 
     NAME                            READY   STATUS    RESTARTS   AGE
     containerapp-745c9c4cb6-wvqjq   1/1     Running   0          6m
