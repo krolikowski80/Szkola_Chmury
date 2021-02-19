@@ -1,8 +1,8 @@
 # Notatki ze spotkania nr 3
 Lift and shift potrafi skończyć na VM
-AppServis   - gotowa uśługa
+AppServis   - gotowa usługa
             - szybko skalowalne ale bez gwarancji
-            - ograniczo liczba zapytań
+            - ograniczona liczba zapytań
 
 AKS - 
 Container Instances -

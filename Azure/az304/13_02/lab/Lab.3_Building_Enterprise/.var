@@ -1,2 +1,5 @@
-export myResourceGroup=rg-images-304
+export myResourceGroup=lab3-zjazd3-rg
 export location=westeurope
+export EventHubsNamespace=lab3-zjazd3-nmspc
+
+export containerRegistryName=lab3zjazd3acr

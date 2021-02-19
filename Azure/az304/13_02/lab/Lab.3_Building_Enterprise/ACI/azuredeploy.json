@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ports": {
+            "type": "array"
+        }
+    },
+    "variables": {
+        "location": "[resourceGroup().location]",
+        "name": "zad3-zjazd3-aci",
+        "imageName": "lab3zjazd3acr.azurecr.io/containerapp:latest",
+        "cpuCores": "1",
+        "memoryInGB": "1.5",
+        "restartPolicy": "OnFailure",
+        "osType": "Linux",
+        "username": "lab3zjazd3acr",
+        "imageRegistryLoginServer": "lab3zjazd3acr.azurecr.io",
+        "dnsNameLabel": "dnsname-lab3-container",
+        "password": "MojeTAjneHasloPobraneZportalu"
+
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "apiVersion": "2019-12-01",
+            "name": "[variables('name')]",
+            "location": "[variables('location')]",
+            "properties": {
+                "containers": [
+                    {
+                        "name": "[variables('name')]",
+                        "properties": {
+                            "image": "[variables('imageName')]",
+                            "ports": "[parameters('ports')]",
+                            "resources": {
+                                "requests": {
+                                    "cpu": "[variables('cpuCores')]",
+                                    "memoryInGB": "[variables('memoryInGB')]"
+                                }
+                            }
+
+                        }
+                    }
+                ],
+                "restartPolicy": "[variables('restartPolicy')]",
+                "osType": "[variables('osType')]",
+                "imageRegistryCredentials": [
+                    {
+                        "username": "[variables('username')]",
+                        "server": "[variables('imageRegistryLoginServer')]",
+                        "password": "[variables('password')]"
+                    }
+                ],
+                "ipAddress": {
+                    "type": "Public",
+                    "ports": "[parameters('ports')]",
+                    "dnsNameLabel": "[variables('dnsNameLabel')]"
+                }
+
+            }
+        }
+    ],
+    "outputs": {}
+}
