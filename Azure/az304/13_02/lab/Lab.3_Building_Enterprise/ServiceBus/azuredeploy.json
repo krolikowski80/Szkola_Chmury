@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "maxTopicSize": {
+            "type": "int"
+        },
+        "MessageTimeToLive": {
+            "type": "string"
+        },
+        "TopicCount": {
+            "type": "int"
+        },
+        "deliverCount": {
+            "type": "int"
+        }
+    },
+    "variables": {
+        "serviceBusNamespaceName": "lab3-zjazd3-sb-nmsc",
+        "skuTier": "Standard",
+        "skuName": "Standard",
+        "copy": [
+            {
+                "name": "subName",
+                "count": "[parameters('TopicCount')]",
+                "input": "[concat('sub-', copyIndex('subName', 1))]"
+            }
+        ]
+
+    },
+    "resources": [
+        {
+            "type": "Microsoft.ServiceBus/namespaces",
+            "apiVersion": "2017-04-01",
+            "name": "[variables('serviceBusNamespaceName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "tier": "[variables('skuTier')]",
+                "name": "[variables('skuName')]"
+            },
+            "properties": {}
+        },
+        {
+            "type": "Microsoft.ServiceBus/namespaces/topics",
+            "apiVersion": "2017-04-01",
+            "dependsOn": [ "[resourceId('Microsoft.ServiceBus/namespaces', variables('serviceBusNamespaceName'))]" ],
+            "name": "[concat(variables('serviceBusNamespaceName'),'/','krolik-topic-',copyIndex('TopicCopy',1))]",
+            "properties": {
+                "maxSizeInMegabytes": "[parameters('maxTopicSize')]",
+                "defaultMessageTimeToLive": "[parameters('MessageTimeToLive')]",
+                "requiresDuplicateDetection": false,
+                "enablePartitioning": true
+            },
+            "copy": {
+                "count": "[parameters('TopicCount')]",
+                "name": "TopicCopy"
+            },
+            "resources": [
+                {
+                    "type": "subscriptions",
+                    "apiVersion": "2017-04-01",
+                    "name": "[variables('subName')[copyIndex()]]",
+                    "dependsOn": [ "[resourceId('Microsoft.ServiceBus/namespaces/topics', variables('serviceBusNamespaceName'), concat('krolik-topic-', copyIndex('TopicCopy',1)))]" ],
+                    "properties": {
+                        "maxDeliveryCount": "[parameters('deliverCount')]"
+                    }
+                }
+            ]
+        }
+    ]
+}

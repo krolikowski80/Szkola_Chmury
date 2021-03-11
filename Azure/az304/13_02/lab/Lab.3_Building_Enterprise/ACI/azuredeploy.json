@@ -17,7 +17,7 @@
         "username": "lab3zjazd3acr",
         "imageRegistryLoginServer": "lab3zjazd3acr.azurecr.io",
         "dnsNameLabel": "dnsname-lab3-container",
-        "password": "MojeTAjneHasloPobraneZportalu"
+        "password": "UCDc4niIU1D23wMBW4b8rM/E00jjNt9V"
 
     },
     "resources": [
@@ -60,6 +60,5 @@
 
             }
         }
-    ],
-    "outputs": {}
+    ]
 }
