@@ -1,5 +1,0 @@
-export mainResGroup=myResourceGroup
-export mainLocation=westeurope
-export vmName=krolikVM01
-
-export rsaName=myRecoveryServicesVault
